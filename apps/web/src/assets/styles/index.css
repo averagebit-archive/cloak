@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap");
+
+:root {
+  --font-mono: "JetBrains Mono", monospace;
+  /* --font-sans: ; */
+  --font-xs: 10px;
+  --font-sm: 12px;
+  --font-base: 14px;
+  --font-md: 16px;
+  --font-h6: 18px;
+  --font-h5: 20px;
+  --font-h4: 24px;
+  --font-h3: 28px;
+  --font-h2: 32px;
+  --font-h1: 36px;
+
+  --font-thin: 100;
+  --font-extra-light: 200;
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+  --font-bold: 700;
+  --font-extra-bold: 800;
+  --font-black: 900;
+
+  --line-height-sm: 1;
+  --line-height-base: 1.25;
+  --line-height-md: 1.5;
+
+  --background: #1e1d2f;
+  --foreground: #d9e0ee;
+  --accent-dark: #181825;
+  --accent-light: #332e41;
+
+  --space: 6px;
+  --space-2x: calc(var(--space) * 2);
+  --space-4x: calc(var(--space) * 4);
+  --space-8x: calc(var(--space) * 8);
+  --space-16x: calc(var(--space) * 16);
+  --space-32x: calc(var(--space) * 32);
+}
+
+html {
+  box-sizing: border-box;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-size: var(--font-base);
+  font-family: var(--font-mono);
+  font-weight: var(--font-regular);
+  line-height: var(--line-height-base);
+}
+
+p {
+  font-size: var(--font-base);
+}
+
+h1 {
+  font-size: var(--font-h1);
+}
+
+h2 {
+  font-size: var(--font-h2);
+}
+
+h3 {
+  font-size: var(--font-h3);
+}
+
+h4 {
+  font-size: var(--font-h4);
+}
+
+h5 {
+  font-size: var(--font-h5);
+}
+
+h6 {
+  font-size: var(--font-h6);
+}
