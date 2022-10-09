@@ -1,5 +1,5 @@
 {
-  "name": "turbo",
+  "name": "cloak",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -9,8 +9,7 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "lint": "turbo run lint"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
