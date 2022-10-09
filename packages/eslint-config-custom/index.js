@@ -1,7 +1,8 @@
 module.exports = {
-  extends: ["next", "turbo", "prettier"],
-  rules: {
-    "@next/next/no-html-link-for-pages": "off",
-    "react/jsx-key": "off",
-  },
+    parser: "@typescript-eslint/parser",
+    plugins: ["solid"],
+    extends: ["plugin:solid/typescript", "turbo", "prettier"],
+    rules: {
+        indent: ["error", 4],
+    },
 };
