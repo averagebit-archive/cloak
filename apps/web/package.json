@@ -9,7 +9,10 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "autoprefixer": "^10.4.12",
     "eslint-config-custom": "workspace:*",
+    "postcss": "^8.4.17",
+    "tailwindcss": "^3.1.8",
     "tsconfig": "workspace:*",
     "typescript": "^4.8.2",
     "vite": "^3.0.9",
