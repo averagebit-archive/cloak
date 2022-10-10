@@ -1,7 +1,15 @@
+import SideNav from "./components/SideNav";
+import ChatContainer from "./components/ChatContainer";
+
 const App = () => {
-  return <h1 class="text-4xl font-bold underline">
-    Hello world!
-  </h1>;
+    return (
+        <div class="flex h-screen antialiased text-gray-800">
+            <div class="flex flex-row h-full w-full overflow-x-hidden">
+                <SideNav />
+                <ChatContainer />
+            </div>
+        </div>
+    );
 };
 
 export default App;
