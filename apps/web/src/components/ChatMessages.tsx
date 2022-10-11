@@ -1,4 +1,4 @@
-const ChatArea = () => {
+const ChatMessages = () => {
     return (
         <div class="flex flex-col h-full overflow-x-auto mb-4">
             <div class="flex flex-col h-full">
@@ -162,4 +162,4 @@ const ChatArea = () => {
     );
 };
 
-export default ChatArea;
+export default ChatMessages;

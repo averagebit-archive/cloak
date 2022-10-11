@@ -1,4 +1,4 @@
-const AttachmentInput = () => {
+const ChatMessageAttachment = () => {
     return (
         <div>
             <button class="flex items-center justify-center text-gray-400 hover:text-gray-600">
@@ -21,4 +21,4 @@ const AttachmentInput = () => {
     );
 };
 
-export default AttachmentInput;
+export default ChatMessageAttachment;

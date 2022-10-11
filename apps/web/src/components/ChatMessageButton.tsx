@@ -1,4 +1,4 @@
-const MessageSendInput = () => {
+const ChatMessageButton = () => {
     return (
         <div class="ml-4">
             <button class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0">
@@ -24,4 +24,4 @@ const MessageSendInput = () => {
     );
 };
 
-export default MessageSendInput;
+export default ChatMessageButton;
