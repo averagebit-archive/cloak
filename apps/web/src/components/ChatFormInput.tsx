@@ -1,4 +1,4 @@
-const ChatMessageInput = () => {
+const ChatFormInput = () => {
     return (
         <div class="flex-grow ml-4">
             <div class="relative w-full">
@@ -27,4 +27,4 @@ const ChatMessageInput = () => {
     );
 };
 
-export default ChatMessageInput;
+export default ChatFormInput;
