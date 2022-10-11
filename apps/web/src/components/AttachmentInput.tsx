@@ -1,9 +1,7 @@
 const AttachmentInput = () => {
     return (
         <div>
-            <button
-                class="flex items-center justify-center text-gray-400 hover:text-gray-600"
-            >
+            <button class="flex items-center justify-center text-gray-400 hover:text-gray-600">
                 <svg
                     class="w-5 h-5"
                     fill="none"
