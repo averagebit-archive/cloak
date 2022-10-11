@@ -6,13 +6,9 @@ const ChatMessage = (props) => {
     return (
         <Show
             when={props.isSender}
-            fallback={
-                <>
-                    <ChatMessageSender message={props.message} />
-                </>
-            }
+            fallback={<ChatMessageRecipient message={props.message} />}
         >
-            <ChatMessageRecipient message={props.message} />
+            <ChatMessageSender message={props.message} />
         </Show>
     );
 };
