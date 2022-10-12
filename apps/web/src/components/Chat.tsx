@@ -1,10 +1,12 @@
+import ChatHeader from "./ChatHeader";
 import ChatContent from "./ChatContent";
 import ChatForm from "./ChatForm";
 
 const Chat = () => {
     return (
-        <main class="flex flex-col flex-auto h-full p-6">
-            <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4">
+        <main class="flex flex-col flex-auto h-full">
+            <div class="flex flex-col flex-auto flex-shrink-0 bg-surface0 h-full">
+                <ChatHeader />
                 <ChatContent />
                 <ChatForm />
             </div>

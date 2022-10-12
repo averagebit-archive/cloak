@@ -1,10 +1,13 @@
 const SidebarFriend = (props) => {
     return (
-        <button class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2">
-            <div class="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full">
-                F
+        <button
+            class="flex flex-row items-center hover:bg-surface0 rounded p-2 text-subtext0"
+            classList={{ "bg-surface0 text-white": props.active }}
+        >
+            <div class="flex items-center justify-center h-8 w-8 bg-surface2 rounded-full">
+                {props.name[0].toUpperCase()}
             </div>
-            <div class="ml-2 text-sm font-semibold">{props.name}</div>
+            <div class="ml-2 font-medium">{props.name}</div>
         </button>
     );
 };

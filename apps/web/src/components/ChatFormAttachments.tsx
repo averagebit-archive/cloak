@@ -1,7 +1,7 @@
-const ChatFormAttachment = () => {
+const ChatFormAttachments = () => {
     return (
         <div>
-            <button class="flex items-center justify-center text-gray-400 hover:text-gray-600">
+            <button class="flex items-center justify-center text-subtext0 hover:text-text">
                 <svg
                     class="w-5 h-5"
                     fill="none"
@@ -21,4 +21,4 @@ const ChatFormAttachment = () => {
     );
 };
 
-export default ChatFormAttachment;
+export default ChatFormAttachments;
