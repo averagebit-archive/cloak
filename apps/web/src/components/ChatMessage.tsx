@@ -1,6 +1,4 @@
 const ChatMessage = (props) => {
-    const currentUser = { name: "averagebit" };
-
     return (
         // TODO: append to last message if the user is the same
         <div class="flex flex-row items-center pb-4">

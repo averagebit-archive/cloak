@@ -1,7 +1,7 @@
 const SidebarFriendAdd = () => {
     return (
         <div class="flex flex-row items-center justify-between text-sm text-subtext0 pt-4 px-6">
-            <span class="font-semibold">FRIENDS</span>
+            <span class="font-bold">FRIENDS</span>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"

@@ -4,7 +4,7 @@ import SidebarFriendList from "./SidebarFriendList";
 
 const Sidebar = () => {
     return (
-        <div class="flex flex-col flex-shrink-0 w-1/5 bg-base">
+        <div class="flex flex-col flex-shrink-0 w-1/5 h-full bg-base">
             <SidebarHeader />
             <SidebarFriendAdd />
             <SidebarFriendList />
