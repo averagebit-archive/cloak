@@ -1,5 +1,5 @@
 import ChatFormAttachment from "./ChatFormAttachment";
-import ChatFormButton from "./ChatFormButton";
+import ChatFormSubmit from "./ChatFormSubmit";
 import ChatFormInput from "./ChatFormInput";
 
 const ChatForm = () => {
@@ -8,7 +8,7 @@ const ChatForm = () => {
         <div class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
             <ChatFormAttachment />
             <ChatFormInput />
-            <ChatFormButton />
+            <ChatFormSubmit />
         </div>
     );
 };

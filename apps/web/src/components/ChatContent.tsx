@@ -1,6 +1,6 @@
 import ChatMessage from "./ChatMessage";
 
-const ChatMessages = () => {
+const ChatContent = () => {
     return (
         <div class="flex flex-col h-full overflow-x-auto mb-4">
             <div class="flex flex-col h-full">
@@ -16,4 +16,4 @@ const ChatMessages = () => {
     );
 };
 
-export default ChatMessages;
+export default ChatContent;
