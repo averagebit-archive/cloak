@@ -1,17 +1,14 @@
 import ChatMessage from "./ChatMessage";
 
 const ChatContent = () => {
-    const sender = { name: "factor" };
-    const recipient = { name: "averagebit" };
+    const user1 = { name: "factor" };
+    const user2 = { name: "averagebit" };
 
     return (
-        <div class="flex flex-col h-full overflow-x-auto mb-4 px-4">
-            <div class="flex flex-col h-full">
-                <div class="grid grid-cols-12 gap-y-2">
-                    <ChatMessage user={sender} message="js is the best" />
-                    <ChatMessage user={recipient} message="bash is better" />
-                </div>
-            </div>
+        <div class="flex flex-col h-full overflow-x-auto p-4">
+            <ChatMessage user={user1} message="js is the best" />
+            <ChatMessage user={user2} message="you can't say that..." />
+            <ChatMessage user={user2} message="bash is better" />
         </div>
     );
 };

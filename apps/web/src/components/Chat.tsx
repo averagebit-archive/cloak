@@ -4,13 +4,11 @@ import ChatForm from "./ChatForm";
 
 const Chat = () => {
     return (
-        <main class="flex flex-col flex-auto h-full">
-            <div class="flex flex-col flex-auto flex-shrink-0 bg-surface0 h-full">
-                <ChatHeader />
-                <ChatContent />
-                <ChatForm />
-            </div>
-        </main>
+        <div class="flex flex-col flex-auto flex-shrink-0 h-full bg-surface0">
+            <ChatHeader />
+            <ChatContent />
+            <ChatForm />
+        </div>
     );
 };
 

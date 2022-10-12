@@ -1,47 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   --font-mono: "JetBrains Mono", monospace;
-  --font-sans: "";
+  --font-sans: "Inter";
 }
 
-html {
-  box-sizing: border-box;
-  /* background-color: var(--background); */
-  /* color: var(--foreground); */
-  font-size: 15px;
-  /* font-family: var(--font-mono); */
-  /* font-weight: var(--font-regular); */
-  /* line-height: var(--line-height-base); */
+html,
+body {
+  font-size: 14px;
+  font-family: var(--font-sans);
 }
 
-p {
-  font-size: var(--font-base);
-}
-
-h1 {
-  font-size: var(--font-h1);
-}
-
-h2 {
-  font-size: var(--font-h2);
-}
-
-h3 {
-  font-size: var(--font-h3);
-}
-
-h4 {
-  font-size: var(--font-h4);
-}
-
-h5 {
-  font-size: var(--font-h5);
-}
-
-h6 {
-  font-size: var(--font-h6);
+body > #root {
+  height: 100vh;
+  width: 100vw;
 }

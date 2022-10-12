@@ -3,11 +3,9 @@ import Chat from "./components/Chat";
 
 const App = () => {
     return (
-        <div class="bg-base flex h-screen antialiased text-text">
-            <div class="flex flex-row h-full w-full overflow-x-hidden">
-                <Sidebar />
-                <Chat />
-            </div>
+        <div class="flex flex-row h-full w-full overflow-x-hidden antialiased bg-base text-text">
+            <Sidebar />
+            <Chat />
         </div>
     );
 };

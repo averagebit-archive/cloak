@@ -1,7 +1,7 @@
 const SidebarFriend = (props) => {
     return (
         <button
-            class="flex flex-row items-center hover:bg-surface0 rounded p-2 text-subtext0"
+            class="flex flex-row items-center hover:bg-surface0 rounded-md p-2 text-subtext0"
             classList={{ "bg-surface0 text-white": props.active }}
         >
             <div class="flex items-center justify-center h-8 w-8 bg-surface2 rounded-full">
