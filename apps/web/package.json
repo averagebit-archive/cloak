@@ -19,6 +19,7 @@
     "vite-plugin-solid": "^2.3.0"
   },
   "dependencies": {
+    "@catppuccin/tailwindcss": "^0.1.0",
     "solid-js": "^1.5.1"
   }
 }
