@@ -4,7 +4,7 @@ const ChatMessage = (props) => {
     return (
         // TODO: append to last message if the user is the same
         <div class="flex flex-row items-center pb-4">
-            <div class="flex flex-shrink-0 items-center justify-center h-10 w-10 rounded-full bg-overlay0">
+            <div class="flex flex-shrink-0 items-center justify-center h-10 w-10 font-semibold text-white rounded-full bg-overlay0">
                 {props.user.name[0].toUpperCase()}
             </div>
             <div class="flex flex-col">
