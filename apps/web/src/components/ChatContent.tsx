@@ -1,14 +1,27 @@
-import ChatMessage from "./ChatMessage";
+import { For } from "solid-js";
+import { User } from "./User";
+import { ChatMessage } from "./ChatMessage";
+import { useStore } from "../store";
 
-const ChatContent = () => {
-    const user1 = { name: "factor" };
-    const user2 = { name: "averagebit" };
+export type ChatConversation = {
+    user: User;
+    messages: ChatMessage[];
+};
+
+export const ChatContent = () => {
+    const [store] = useStore();
+    console.log(store);
 
     return (
         <div class="flex flex-col h-full overflow-x-auto p-4">
-            <ChatMessage user={user1} message="js is the best" />
-            <ChatMessage user={user2} message="you can't say that..." />
-            <ChatMessage user={user2} message="bash is better" />
+            <For each={store.conversation.messages}>
+                {(message, i) => (
+                    <ChatMessage
+                        user={message.user}
+                        content={message.content}
+                    />
+                )}
+            </For>
         </div>
     );
 };
