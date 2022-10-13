@@ -1,18 +1,18 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Solid JS",
-  "extends": "./base.json",
-  "compilerOptions": {
-    "strict": true,
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js",
-    "noEmit": true,
-    "isolatedModules": true
-  },
-  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Solid JS",
+    "extends": "./base.json",
+    "compilerOptions": {
+        "strict": true,
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "jsx": "preserve",
+        "jsxImportSource": "solid-js",
+        "noEmit": true,
+        "isolatedModules": true
+    },
+    "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
 }
