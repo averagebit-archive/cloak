@@ -1,13 +1,9 @@
-import Sidebar from "./components/Sidebar";
-import Chat from "./components/Chat";
+import { routes } from "./router";
+import { useRoutes } from "@solidjs/router";
 
 const App = () => {
-    return (
-        <div class="flex flex-row h-full w-full overflow-x-hidden antialiased bg-base text-text">
-            <Sidebar />
-            <Chat />
-        </div>
-    );
+    const Routes = useRoutes(routes);
+    return <Routes />;
 };
 
 export default App;
