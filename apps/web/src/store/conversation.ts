@@ -1,12 +1,14 @@
 import { http } from "./http";
 import { createResource } from "solid-js";
 
-export const createConversation = (actions) => {
+export const createConversation = (callback: any) => {
     const [conversation] = createResource(http.getConversation);
+    const conversationActions = {
+        async createMessage() {
+        }
+    };
 
-    Object.assign(actions, {
-        async createMessage() {},
-    });
+    callback(conversationActions);
 
     return conversation;
 };

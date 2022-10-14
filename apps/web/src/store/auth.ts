@@ -1,27 +1,33 @@
 import { http } from "./http";
-import { createSignal, createResource } from "solid-js";
+import { createSignal, createResource, Resource } from "solid-js";
 
-export const createAuth = (actions) => {
+export type User = {
+    username: string;
+}
+
+export type UserActions = {
+    register: () => Promise<void>
+    login: () => Promise<void>
+    logout: () => Promise<void>
+};
+
+export const createAuth = (): [Resource<User>, UserActions] => {
     const [authenticated, setAuthenticated] = createSignal(false);
     const [user, { mutate }] = createResource(authenticated, http.getUser);
 
-    Object.assign(actions, {
+    const actions: UserActions = {
         async register() {
             setAuthenticated(true);
         },
         async login() {
             setAuthenticated(true);
         },
-        logout() {
+        async logout() {
             mutate(undefined);
-        },
-        // async update(user) {
-        //     const user = http.update(user);
-        //     mutate(user);
-        // },
-    });
+        }
+    };
 
-    return user;
+    return [user, actions];
 };
 
 export default createAuth;

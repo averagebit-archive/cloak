@@ -1,33 +1,36 @@
 export const http = {
-    getUser: () =>
-        Promise.resolve({
-            id: 0,
-            username: "averagebit",
-        }),
+    getUser: async () => {
+        const userRes = await fetch(`https://swapi.dev/api/people/1/`);
+        const user = await userRes.json();
+
+        return {
+            username: user.name
+        }
+    },
     getConversation: () =>
         Promise.resolve({
             messages: [
                 {
                     user: {
                         id: 1,
-                        username: "factor",
+                        username: "factor"
                     },
-                    content: "JS is the best",
+                    content: "JS is the best"
                 },
                 {
                     user: {
                         id: 0,
-                        username: "averagebit",
+                        username: "averagebit"
                     },
-                    content: "you can't say that...",
+                    content: "you can't say that..."
                 },
                 {
                     user: {
                         id: 0,
-                        username: "averagebit",
+                        username: "averagebit"
                     },
-                    content: "bash is the best",
-                },
-            ],
-        }),
+                    content: "bash is the best"
+                }
+            ]
+        })
 };

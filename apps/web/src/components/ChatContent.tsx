@@ -10,12 +10,11 @@ export type ChatConversation = {
 
 export const ChatContent = () => {
     const [store] = useStore();
-    console.log(store);
 
     return (
         <div class="flex flex-col h-full overflow-x-auto p-4">
-            <For each={store.conversation.messages}>
-                {(message, i) => (
+            <For each={store.conversation().messages}>
+                {(message: ChatMessage) => (
                     <ChatMessage
                         user={message.user}
                         content={message.content}

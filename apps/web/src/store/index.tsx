@@ -1,33 +1,53 @@
-import { createContext, useContext } from "solid-js";
+import { createContext, Resource, useContext } from "solid-js";
 import { createStore } from "solid-js/store";
-import { createAuth } from "./auth";
+import { createAuth, User, UserActions } from "./auth";
 import { createConversation } from "./conversation";
 
 const StoreContext = createContext();
 
-export const StoreProvider = (props) => {
-    let user, conversation;
+export type Store = {
+    user: Resource<User>;
+    conversation: any;
+}
 
-    const [state, setState] = createStore({
-        get user() {
-            return user();
-        },
-        get conversation() {
-            return conversation();
-        },
+export type StoreActions = {
+    user: UserActions;
+    conversation: any;
+};
+
+type SuperStore = [Store, StoreActions];
+
+export const StoreProvider = (props) => {
+    const storeDefault: Store = {
+        user: null,
+        conversation: null
+    };
+
+    const [state, setState] = createStore(storeDefault);
+
+    const [userStore, userActions] = createAuth();
+    // const conversation = createConversation((conversationActions) => {
+    //     const actionsOld: StoreActions = {
+    //         user: null,
+    //         conversation: null
+    //     };
+    //     actionsOld.conversation = conversationActions;
+    // });
+
+    setState({
+        user: userStore,
+        // conversation
     });
 
-    const actions = {};
-    const store = [state, actions];
-
-    user = createAuth(actions, state);
-    conversation = createConversation(actions, state);
+    const actions: StoreActions = {
+        user: userActions,
+        conversation: null
+        // ...actionsOld
+    };
 
     return (
-        <StoreContext.Provider value={store}>
-            {props.children}
-        </StoreContext.Provider>
+        <StoreContext.Provider children={props.children} value={[state, actions]} />
     );
 };
 
-export const useStore = () => useContext(StoreContext);
+export const useStore = (): SuperStore => useContext(StoreContext) as SuperStore;
