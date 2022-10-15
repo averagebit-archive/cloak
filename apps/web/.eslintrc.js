@@ -1,4 +1,7 @@
 module.exports = {
     root: true,
-    extends: ["custom"],
+    parser: "@typescript-eslint/parser",
+    plugins: ["solid"],
+    extends: ["plugin:solid/typescript", "prettier"],
+    rules: {},
 };
