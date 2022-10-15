@@ -1,33 +1,49 @@
-import { http } from "./http";
-import { createSignal, createResource, Resource } from "solid-js";
+import { createEffect, createSignal, createResource, Resource } from "solid-js";
+import { User } from "../shared/interfaces";
 
-export type User = {
-    username: string;
-}
+export type AuthState = User;
 
-export type UserActions = {
-    register: () => Promise<void>
-    login: () => Promise<void>
-    logout: () => Promise<void>
+export type AuthActions = {
+    me: () => void;
+    login: () => Promise<void>;
+    logout: () => void;
+    register: () => Promise<void>;
 };
 
-export const createAuth = (): [Resource<User>, UserActions] => {
+export const createAuth = (
+    http,
+    state,
+    setState
+): [Resource<AuthState>, AuthActions] => {
     const [authenticated, setAuthenticated] = createSignal(false);
-    const [user, { mutate }] = createResource(authenticated, http.getUser);
+    const [user, { mutate }] = createResource(authenticated, http.Auth.user);
 
-    const actions: UserActions = {
-        async register() {
+    createEffect(() => {
+        state.token
+            ? localStorage.setItem("token", state.token)
+            : localStorage.removeItem("token");
+    });
+
+    const actions: AuthActions = {
+        me: () => {
             setAuthenticated(true);
         },
-        async login() {
+        login: async () => {
+            const user = await http.Auth.login();
+            setState({ token: user.token });
             setAuthenticated(true);
         },
-        async logout() {
+        logout: () => {
             mutate(undefined);
-        }
+            setState({ token: undefined });
+            setAuthenticated(false);
+        },
+        register: async () => {
+            const user = await http.Auth.register();
+            setState({ token: user.token });
+            setAuthenticated(true);
+        },
     };
 
     return [user, actions];
 };
-
-export default createAuth;

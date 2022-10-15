@@ -1,27 +1,24 @@
-import { For } from "solid-js";
-import { User } from "./User";
+import { Suspense, For } from "solid-js";
 import { ChatMessage } from "./ChatMessage";
+import { ChannelMessage } from "../shared/interfaces";
 import { useStore } from "../store";
 
-export type ChatConversation = {
-    user: User;
-    messages: ChatMessage[];
-};
-
 export const ChatContent = () => {
-    const [store] = useStore();
+    const [state] = useStore();
 
     return (
-        <div class="flex flex-col h-full overflow-x-auto p-4">
-            <For each={store.conversation().messages}>
-                {(message: ChatMessage) => (
-                    <ChatMessage
-                        user={message.user}
-                        content={message.content}
-                    />
-                )}
-            </For>
-        </div>
+        <Suspense fallback={<span>loading content</span>}>
+            <div class="flex flex-col h-full overflow-x-auto p-4">
+                <For each={state.channel() && state.channel().messages}>
+                    {(message: ChannelMessage) => (
+                        <ChatMessage
+                            username={message.user.username}
+                            content={message.content}
+                        />
+                    )}
+                </For>
+            </div>
+        </Suspense>
     );
 };
 
