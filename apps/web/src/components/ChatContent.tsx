@@ -9,7 +9,7 @@ export const ChatContent = () => {
     return (
         <Suspense fallback={<span>loading content</span>}>
             <div class="flex flex-col h-full overflow-x-auto p-4">
-                <For each={state.channel() && state.channel().messages}>
+                <For each={state.channel && state.channel()?.messages}>
                     {(message: ChannelMessage) => (
                         <ChatMessage
                             username={message.user.username}

@@ -1,13 +1,17 @@
 import { createStore } from "solid-js/store";
-import { createContext, Resource, useContext } from "solid-js";
-import { createAuth, AuthState, AuthActions } from "./auth";
+import { createContext, createResource, Resource, useContext } from "solid-js";
+import { createAuth, AuthActions } from "./auth";
 import { createChannel, ChannelState, ChannelActions } from "./channel";
 import { http } from "./http";
+import { User } from "../shared/interfaces";
+
+export type AuthStore = Resource<User>;
+export type ChannelStore = Resource<ChannelState> | null;
 
 export type State = {
-    channel: Resource<ChannelState>;
-    token: string;
-    user: Resource<AuthState>;
+    token: string | null;
+    channel: ChannelStore;
+    user: AuthStore;
 };
 
 export type Actions = {
@@ -19,11 +23,20 @@ type Store = [State, Actions];
 
 const Context = createContext();
 
-export const Provider = (props) => {
+export const defaultUser = {
+    id: Infinity,
+    username: "",
+    token: ""
+};
+
+export const Provider = (props: any) => {
+    // TODO: think of better way of creating initial state
+    const [user] = createResource<User>(() => (defaultUser));
+
     const initialState: State = {
         channel: null,
         token: localStorage.getItem("token"),
-        user: null,
+        user: user
     };
 
     const [state, setState] = createStore(initialState);
@@ -32,12 +45,12 @@ export const Provider = (props) => {
 
     setState({
         channel: channelState,
-        user: authState,
+        user: authState
     });
 
     const actions: Actions = {
         channel: channelActions,
-        user: authActions,
+        user: authActions
     };
 
     return (

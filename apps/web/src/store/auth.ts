@@ -1,7 +1,7 @@
 import { createEffect, createSignal, createResource, Resource } from "solid-js";
 import { User } from "../shared/interfaces";
-
-export type AuthState = User;
+import { SetStoreFunction, Store } from "solid-js/store";
+import { AuthStore, defaultUser, State } from "./index";
 
 export type AuthActions = {
     me: () => void;
@@ -11,12 +11,14 @@ export type AuthActions = {
 };
 
 export const createAuth = (
-    http,
-    state,
-    setState
-): [Resource<AuthState>, AuthActions] => {
+    http: any, // TODO: type this bitch
+    state: Store<State>,
+    setState: SetStoreFunction<State>
+): [AuthStore, AuthActions] => {
     const [authenticated, setAuthenticated] = createSignal(false);
-    const [user, { mutate }] = createResource(authenticated, http.Auth.user);
+    const [user, { mutate }] = createResource<User, boolean>(authenticated, http.Auth.user, {
+        initialValue: defaultUser
+    });
 
     createEffect(() => {
         state.token
@@ -34,7 +36,7 @@ export const createAuth = (
             setAuthenticated(true);
         },
         logout: () => {
-            mutate(undefined);
+            mutate(defaultUser);
             setState({ token: undefined });
             setAuthenticated(false);
         },
@@ -42,7 +44,7 @@ export const createAuth = (
             const user = await http.Auth.register();
             setState({ token: user.token });
             setAuthenticated(true);
-        },
+        }
     };
 
     return [user, actions];
