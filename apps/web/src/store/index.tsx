@@ -22,7 +22,7 @@ export type Actions = {
 
 type Store = [State, Actions];
 
-export const MainContext = createContext();
+export const Context = createContext();
 
 export const initStore = () => {
     const [channel] = createResource<Channel>(() => defaultChannel);
@@ -49,11 +49,7 @@ export const initStore = () => {
     return [state, actions];
 };
 
-export const useStore = (): Store => {
-    const store = useContext(MainContext) as Store;
-    console.log(store)
-    return store;
-};
+export const useStore = (): Store => useContext(Context) as Store;
 
 
 
