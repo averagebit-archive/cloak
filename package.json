@@ -12,8 +12,14 @@
         "format": "prettier --write \"**/*.{js,jsx,ts,tsx,md}\""
     },
     "devDependencies": {
+        "@typescript-eslint/parser": "^5.40.0",
+        "eslint": "^8.25.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "eslint-plugin-solid": "^0.7.3",
         "prettier": "latest",
-        "turbo": "latest"
+        "turbo": "latest",
+        "typescript": "^4.8.2"
     },
     "engines": {
         "node": ">=14.0.0"

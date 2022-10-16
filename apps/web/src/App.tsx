@@ -17,7 +17,7 @@ export const App = () => {
 
     return (
         <Suspense fallback={<span>app is loading...</span>}>
-            <Show when={loaded()}>
+            <Show when={loaded()} keyed>
                 <Router>
                     <Routes />
                 </Router>
