@@ -1,16 +1,15 @@
-import { Suspense } from "solid-js";
-import { useStore } from "../store";
+import { Component, Suspense } from "solid-js";
 
-const ChatHeader = () => {
-    const [state] = useStore();
+type ChatHeaderProps = {
+    username: string;
+};
 
+const ChatHeader: Component<ChatHeaderProps> = (props: ChatHeaderProps) => {
     return (
         <div class="flex items-center border-b-2 border-b-base p-4">
             <span class="mr-2 font-semibold text-lg text-subtext0">@</span>
             <Suspense fallback={<span>loading content</span>}>
-                <span class="font-semibold text-lg">
-                    {state.channel() && state.channel()?.users[0].username}
-                </span>
+                <span class="font-semibold text-lg">{props.username}</span>
             </Suspense>
         </div>
     );

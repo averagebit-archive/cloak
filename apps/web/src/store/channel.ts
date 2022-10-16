@@ -1,24 +1,28 @@
-import { createResource, Resource } from "solid-js";
+import { Store } from "solid-js/store/types/store";
+import { createStore } from "solid-js/store";
 import { Channel } from "../shared/interfaces";
 
-export const defaultChannel = {
+export type ChannelStore = Store<Channel> | Channel;
+
+export const defaultChannelStore = {
     id: Infinity,
     users: [],
     messages: [],
 };
 
-export type ChannelState = Resource<Channel>;
-
 export type ChannelActions = {
-    sendMessage: (id: number) => Promise<void>;
+    fetchChannel: () => Promise<void>;
 };
 
-export const createChannel = (http: any): [ChannelState, ChannelActions] => {
-    const [channel] = createResource<Channel>(http.Channel.current);
+export const createChannel = (http: any): [ChannelStore, ChannelActions] => {
+    const [store, setStore] = createStore({ ...defaultChannelStore });
 
     const actions: ChannelActions = {
-        sendMessage: async () => {},
+        fetchChannel: async () => {
+            const channel = await http.Channel.fetch();
+            setStore({ ...channel });
+        },
     };
 
-    return [channel, actions];
+    return [store, actions];
 };

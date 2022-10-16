@@ -20,7 +20,7 @@ export const http = {
         register: () => req("POST", "/register", mockUser, 500),
     },
     Channel: {
-        current: () => req("GET", "/channel", mockChannel, 500),
+        fetch: () => req("GET", "/channel", mockChannel, 500),
     },
 };
 
