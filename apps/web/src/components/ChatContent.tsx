@@ -1,4 +1,4 @@
-import { Suspense, For, Component } from "solid-js";
+import { Suspense, For, Component, Show } from "solid-js";
 import { ChatMessage } from "./ChatMessage";
 import { ChannelMessage } from "../shared/interfaces";
 
@@ -10,7 +10,7 @@ export const ChatContent: Component<ChatContentProps> = (
     props: ChatContentProps
 ) => {
     return (
-        <Suspense fallback={<span>loading content</span>}>
+        <Show when={props.messages.length} fallback={<span>loading content</span>}>
             <div class="flex flex-col h-full overflow-x-auto p-4">
                 <For each={props.messages}>
                     {(message) => (
@@ -21,7 +21,7 @@ export const ChatContent: Component<ChatContentProps> = (
                     )}
                 </For>
             </div>
-        </Suspense>
+        </Show>
     );
 };
 
