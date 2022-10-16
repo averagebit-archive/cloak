@@ -1,5 +1,5 @@
 import { createStore } from "solid-js/store";
-import { createContext, createResource, useContext } from "solid-js";
+import { createResource, useContext } from "solid-js";
 import { createAuth, AuthActions, AuthStore } from "./auth";
 import {
     createChannel,
@@ -9,6 +9,7 @@ import {
 } from "./channel";
 import { http } from "./http";
 import { Channel, User } from "../shared/interfaces";
+import { Context } from "../App";
 
 export type State = {
     channel: ChannelState;
@@ -22,7 +23,6 @@ export type Actions = {
 
 type Store = [State, Actions];
 
-export const Context = createContext();
 
 export const initStore = () => {
     const [channel] = createResource<Channel>(() => defaultChannel);
