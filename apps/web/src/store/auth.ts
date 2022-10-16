@@ -1,9 +1,10 @@
-import { createEffect, createSignal, createResource, Resource } from "solid-js";
-import { SetStoreFunction, Store } from "solid-js/store/types/store";
+import { Store } from "solid-js/store/types/store";
 import { User } from "../shared/interfaces";
-import { State } from "./index";
+import { createStore } from "solid-js/store";
+import { createEffect } from "solid-js";
 
-export type AuthState = Resource<User>;
+export type UserStore = User & { authenticated: boolean };
+export type AuthStore = Store<UserStore> | User;
 
 export type AuthActions = {
     fetch: () => void;
@@ -12,52 +13,49 @@ export type AuthActions = {
     register: () => Promise<void>;
 };
 
-export const defaultUser = {
+const defaultUserStore = {
     id: Infinity,
     username: "",
     token: "",
+    authenticated: false
 };
 
 export const createAuth = (
-    http: any, // TODO: type this bitch
-    state: Store<State>,
-    setState: SetStoreFunction<State>
-): [AuthState, AuthActions] => {
-    const [authenticated, setAuthenticated] = createSignal(false);
-    const [user, { mutate }] = createResource<User, boolean>(
-        authenticated,
-        http.Auth.user,
-        {
-            initialValue: defaultUser,
-        }
-    );
+    http: any // TODO: type this bitch
+): [AuthStore, AuthActions] => {
+    const [store, setStore] = createStore({ ...defaultUserStore }, {
+        name: "user"
+    });
 
     createEffect(() => {
-        state.token
-            ? localStorage.setItem("token", state.token)
+        store.token
+            ? localStorage.setItem("token", store.token)
             : localStorage.removeItem("token");
     });
 
     const actions: AuthActions = {
         fetch: () => {
-            setAuthenticated(true);
+            setStore({
+                authenticated: true
+            });
         },
         login: async () => {
             const user = await http.Auth.login();
-            setState({ token: user.token });
-            setAuthenticated(true);
+            setStore({
+                ...user,
+                authenticated: true
+            });
         },
         logout: () => {
-            mutate(defaultUser);
-            setState({ token: undefined });
-            setAuthenticated(false);
+            setStore(defaultUserStore);
         },
         register: async () => {
-            const user = await http.Auth.register();
-            setState({ token: user.token });
-            setAuthenticated(true);
-        },
+            await http.Auth.register();
+            setStore({
+                authenticated: true
+            });
+        }
     };
 
-    return [user, actions];
+    return [store, actions];
 };
