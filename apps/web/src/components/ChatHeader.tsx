@@ -9,7 +9,7 @@ const ChatHeader = () => {
             <span class="mr-2 font-semibold text-lg text-subtext0">@</span>
             <Suspense fallback={<span>loading content</span>}>
                 <span class="font-semibold text-lg">
-                    {state.channel() && state.channel().users[0].username}
+                    {state.channel() && state.channel()?.users[0].username}
                 </span>
             </Suspense>
         </div>

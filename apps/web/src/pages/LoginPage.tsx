@@ -6,7 +6,7 @@ const LoginPage = () => {
     return (
         <>
             <h1>LoginPage</h1>
-            <button onClick={(e) => actions.user.login()}>Login</button>
+            <button onClick={() => actions.user.login()}>Login</button>
         </>
     );
 };

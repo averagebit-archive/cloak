@@ -6,14 +6,14 @@ const HomePage: Component = () => {
 
     return (
         <>
-            <h1>HomePage, {state.user() && state.user().username}</h1>
+            <h1>HomePage, {state.user() && state.user()?.username}</h1>
             <Show
                 when={state.token}
                 fallback={
-                    <button onClick={(e) => actions.user.login()}>Login</button>
+                    <button onClick={() => actions.user.login()}>Login</button>
                 }
             >
-                <button onClick={(e) => actions.user.logout()}>Logout</button>
+                <button onClick={() => actions.user.logout()}>Logout</button>
             </Show>
         </>
     );
