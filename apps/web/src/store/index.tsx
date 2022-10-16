@@ -10,7 +10,6 @@ import {
 import { http } from "./http";
 import { Channel, User } from "../shared/interfaces";
 
-
 export type State = {
     channel: ChannelState;
     user: AuthStore;
@@ -23,9 +22,9 @@ export type Actions = {
 
 type Store = [State, Actions];
 
-const Context = createContext();
+export const MainContext = createContext();
 
-export const Provider = (props: any) => {
+export const initStore = () => {
     const [channel] = createResource<Channel>(() => defaultChannel);
 
     const initialState: State = {
@@ -46,13 +45,15 @@ export const Provider = (props: any) => {
         channel: channelActions,
         user: authActions
     };
-    return (
-        <Context.Provider children={props.children} value={[state, actions]} />
-    );
+
+    return [state, actions];
 };
 
 export const useStore = (): Store => {
-    const store = useContext(Context) as Store;
-    console.log(store);
+    const store = useContext(MainContext) as Store;
+    console.log(store)
     return store;
 };
+
+
+
