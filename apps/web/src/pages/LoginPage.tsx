@@ -1,6 +1,6 @@
 import { useStore } from "../store";
 
-const LoginPage = () => {
+export function LoginPage() {
     const [, actions] = useStore();
 
     return (

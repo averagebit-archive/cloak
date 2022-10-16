@@ -7,7 +7,7 @@ export type UserStore = User & { authenticated: boolean };
 export type AuthStore = Store<UserStore> | User;
 
 export type AuthActions = {
-    fetch: () => void;
+    setUserAuthenticated: () => void;
     login: () => Promise<void>;
     logout: () => void;
     register: () => Promise<void>;
@@ -34,7 +34,7 @@ export const createAuth = (
     });
 
     const actions: AuthActions = {
-        fetch: () => {
+        setUserAuthenticated: () => {
             setStore({
                 authenticated: true
             });

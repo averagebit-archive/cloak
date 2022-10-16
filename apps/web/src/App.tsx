@@ -3,7 +3,6 @@ import { Auth } from "./components/Auth";
 import routes from "./router";
 import { Context, initStore } from "./store";
 
-
 export const App = () => {
     const Routes = useRoutes(routes);
     const [state, actions ] = initStore();
