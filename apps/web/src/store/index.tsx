@@ -46,7 +46,6 @@ export const Provider = (props: any) => {
         channel: channelActions,
         user: authActions
     };
-
     return (
         <Context.Provider children={props.children} value={[state, actions]} />
     );

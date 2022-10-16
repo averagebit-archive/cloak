@@ -7,7 +7,7 @@ const Protected: Component = () => {
     const [state] = useStore();
 
     return (
-        <Show when={state.token} fallback={<LoginPage />}>
+        <Show when={state.user.token} fallback={<LoginPage />}>
             <Outlet />
         </Show>
     );
