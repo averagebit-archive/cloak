@@ -11,8 +11,7 @@ export const App = () => {
     if (!state.token) {
         setLoaded(true);
     } else {
-        actions.user.login();
-        actions.user.me();
+        actions.user.fetch();
         state.token && setLoaded(true);
     }
 

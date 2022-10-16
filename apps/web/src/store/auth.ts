@@ -4,7 +4,7 @@ import { SetStoreFunction, Store } from "solid-js/store";
 import { AuthStore, defaultUser, State } from "./index";
 
 export type AuthActions = {
-    me: () => void;
+    fetch: () => void;
     login: () => Promise<void>;
     logout: () => void;
     register: () => Promise<void>;
@@ -27,7 +27,7 @@ export const createAuth = (
     });
 
     const actions: AuthActions = {
-        me: () => {
+        fetch: () => {
             setAuthenticated(true);
         },
         login: async () => {
