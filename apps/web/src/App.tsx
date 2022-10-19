@@ -1,22 +1,18 @@
 import { Router, useRoutes } from "@solidjs/router";
 import { Auth } from "./components/Auth";
 import routes from "./router";
-import { initStore } from "./store";
-import { createContext } from "solid-js";
-
-export const Context = createContext();
+import { AuthContext, createAuth } from "./store/auth";
 
 export const App = () => {
     const Routes = useRoutes(routes);
-    const [state, actions] = initStore();
 
     return (
-        <Context.Provider value={[state, actions]}>
+        <AuthContext.Provider value={createAuth()}>
             <Auth>
                 <Router>
                     <Routes />
                 </Router>
             </Auth>
-        </Context.Provider>
+        </AuthContext.Provider>
     );
 };
