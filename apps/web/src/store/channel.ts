@@ -11,15 +11,14 @@ export const defaultChannelStore = {
 };
 
 export type ChannelActions = {
-    fetchChannel: () => Promise<void>;
+    updateChannel: (channel: any) => void;
 };
 
-export const createChannel = (http: any): [ChannelStore, ChannelActions] => {
+export const createChannel = (): [ChannelStore, ChannelActions] => {
     const [store, setStore] = createStore({ ...defaultChannelStore });
 
     const actions: ChannelActions = {
-        fetchChannel: async () => {
-            const channel = await http.Channel.fetch();
+        updateChannel: (channel: any) => {
             setStore({ ...channel });
         },
     };

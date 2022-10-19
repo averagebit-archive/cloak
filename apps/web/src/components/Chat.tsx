@@ -5,7 +5,7 @@ import { useStore } from "../store";
 
 const Chat = () => {
     const [state, actions] = useStore();
-    actions.channel.fetchChannel();
+    actions.channel.updateChannel();
 
     return (
         <div class="flex flex-col flex-auto flex-shrink-0 h-full bg-surface0">

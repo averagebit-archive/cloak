@@ -6,7 +6,7 @@ export function LoginPage() {
     return (
         <>
             <h1>LoginPage</h1>
-            <button onClick={() => actions.user.login()}>Login</button>
+            <button onClick={() => actions.user.setUser()}>Login</button>
         </>
     );
 };

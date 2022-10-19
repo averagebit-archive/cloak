@@ -1,61 +1,73 @@
 import { Store } from "solid-js/store/types/store";
 import { User } from "../shared/interfaces";
 import { createStore } from "solid-js/store";
-import { createEffect } from "solid-js";
+import { createEffect, createResource } from "solid-js";
+import { http } from "../http";
 
 export type UserStore = User & { authenticated: boolean };
-export type AuthStore = Store<UserStore> | User;
+export type AuthStore = Store<UserStore> | UserStore;
 
 export type AuthActions = {
-    setUserAuthenticated: () => void;
-    login: () => Promise<void>;
-    logout: () => void;
-    register: () => Promise<void>;
+	setUserAuthenticated: () => void;
+	setUser: (user?: User | false) => void;
 };
 
 const defaultUserStore = {
-    id: Infinity,
-    username: "",
-    token: "",
-    authenticated: false
+	id: Infinity,
+	username: "",
+	token: "",
+	authenticated: false
 };
 
 export const createAuth = (
-    http: any // TODO: type this bitch
+	http: any // TODO: type this bitch
 ): [AuthStore, AuthActions] => {
-    const [store, setStore] = createStore({ ...defaultUserStore }, {
-        name: "user"
-    });
+	const [store, setStore] = createStore({ ...defaultUserStore }, {
+		name: "user"
+	});
+
+	createEffect(() => {
+		store.token
+			? localStorage.setItem("token", store.token)
+			: localStorage.removeItem("token");
+	});
+
+	const actions: AuthActions = {
+		setUserAuthenticated: () => {
+			setStore({
+				authenticated: true
+			});
+		},
+		setUser: (user?: User | false) => {
+			if (!user) {
+				setStore(defaultUserStore)
+				return
+			};
+
+			setStore({
+				...user
+			});
+		},
+	};
+
+	return [store, actions];
+};
+
+export function createUserActions([user, actions]): any {
+    const [userResource, { mutate }] = createResource(() => user.authenticated, http.Auth.user, { initialValue: user });
 
     createEffect(() => {
-        store.token
-            ? localStorage.setItem("token", store.token)
-            : localStorage.removeItem("token");
+        console.log(userResource())
+        actions.setUser(userResource())
     });
 
-    const actions: AuthActions = {
-        setUserAuthenticated: () => {
-            setStore({
-                authenticated: true
-            });
-        },
-        login: async () => {
-            const user = await http.Auth.login();
-            setStore({
-                ...user,
-                authenticated: true
-            });
+    return [userResource, {
+        login: () => {
+            actions.setUserAuthenticated();
         },
         logout: () => {
-            setStore(defaultUserStore);
-        },
-        register: async () => {
-            await http.Auth.register();
-            setStore({
-                authenticated: true
-            });
+            actions.setUser(false);
+            mutate(user);
         }
-    };
-
-    return [store, actions];
-};
+    }]
+}

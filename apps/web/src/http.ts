@@ -7,6 +7,7 @@ const req = async (
 ) => {
     try {
         const res = await mockRequest(data, timeout);
+        console.log('req');
         return res.data;
     } catch (err) {
         return err;
@@ -39,7 +40,7 @@ const mockRequest = (data: any, timeout?: number) => {
 const mockUser = {
     id: 0,
     username: "averagebit",
-    token: "jwt-token",
+    token: "jwt-token"
 };
 
 const mockChannel = {

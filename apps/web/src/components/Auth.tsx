@@ -5,9 +5,9 @@ export const Auth = (props: any) => {
     const [state, actions] = useStore();
     const [loaded, setLoaded] = createSignal(true);
 
-    if (state.user.token.length) {
-        actions.user.setUserAuthenticated();
-    }
+    // if (state.user.token.length) {
+    //     actions.user.setUserAuthenticated();
+    // }
 
     setLoaded(true);
 
