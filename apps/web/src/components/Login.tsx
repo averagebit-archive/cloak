@@ -5,7 +5,6 @@ import { Button } from "./common/Button";
 
 export const Login = () => {
     const [user, actions] = useUserStore();
-    // Possibly when something async is happening we put a loader component here?
     const [userResource] = createResource(() => user.authenticated, getUser, { initialValue: user });
 
     async function getUser() {
@@ -18,13 +17,9 @@ export const Login = () => {
         return userRes;
     }
 
-   function logout() {
-       actions.setUser(false);
-    }
-
     return (
         <Show when={!user.authenticated} fallback={
-            <Button text="Logout" isLoading={userResource.loading} callback={logout} />
+            <Button text="Logout" isLoading={userResource.loading} callback={() => actions.setUser(false)} />
         } keyed>
             <Button text="Login" isLoading={userResource.loading} callback={actions.setUserAuthenticated} />
         </Show>
