@@ -1,21 +1,14 @@
-import { Component,  Show } from "solid-js";
-import { createUserActions, useUserStore } from "../store/auth";
+import { Component } from "solid-js";
+import { useUserStore } from "../store/auth";
+import { Login } from "../components/Login";
 
 const HomePage: Component = () => {
-    const [user, actions] = useUserStore();
-    const [userResource, { login, logout }] = createUserActions([user, actions]);
-
+    const [user] = useUserStore();
     return (
         <>
             <h1>Welcome, {user.username}</h1>
-            <Show
-                when={user.token}
-                fallback={<button onClick={() => login()}>Login</button>}
-                keyed>
-                <button onClick={() => logout()}>Logout</button>
-            </Show>
-            {JSON.stringify(user)} <br/>
-            {JSON.stringify(userResource())}
+            <Login />
+            {JSON.stringify(user)} <br />
         </>
     );
 };

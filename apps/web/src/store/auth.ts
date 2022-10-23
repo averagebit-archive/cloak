@@ -43,32 +43,11 @@ export const createAuth = (): [AuthStore, AuthActions] => {
             if (!user) {
                 setStore(defaultUserStore)
                 return
-            };
+            }
 
-            setStore({
-                ...user
-            });
+            setStore(user);
         },
     };
 
     return [store, actions];
 };
-
-export function createUserActions([user, actions]: [AuthStore, AuthActions]): any {
-    const [userResource, { mutate }] = createResource(() => user.authenticated, http.Auth.user, { initialValue: user });
-
-    createEffect(() => {
-        console.log(userResource())
-        actions.setUser(userResource())
-    });
-
-    return [userResource, {
-        login: () => {
-            actions.setUserAuthenticated();
-        },
-        logout: () => {
-            actions.setUser(false);
-            mutate(user);
-        }
-    }]
-}
