@@ -1,6 +1,6 @@
 import { Component } from "solid-js";
-import Sidebar from "../components/Sidebar";
-import Chat from "../components/Chat";
+import Sidebar from "../components/sidebar/Sidebar";
+import Chat from "../components/chat/Chat";
 
 const ChatPage: Component = () => {
     return (
