@@ -1,13 +1,13 @@
 import { Component, Show } from "solid-js";
 import { Outlet } from "@solidjs/router";
-import { useStore } from "../store";
 import LoginPage from "../pages/LoginPage";
+import { useUserStore } from "../store/auth";
 
 const Protected: Component = () => {
-    const [state] = useStore();
+    const [user] = useUserStore();
 
     return (
-        <Show when={state.user.token} fallback={<LoginPage />}>
+        <Show when={user.token} fallback={<LoginPage />}>
             <Outlet />
         </Show>
     );
