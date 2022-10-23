@@ -9,13 +9,12 @@ export type ButtonProps = {
 
 export const Button = (props: ButtonProps) => {
     return (
-        <Show when={!props.isLoading} fallback={<LoaderSpinner />}>
-            <button onClick={() => props.callback()}
-                    type="button"
-                    class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+        <button onClick={() => props.callback()}
+                type="button"
+                class="w-24 align-middle h-8 border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
+            <Show when={!props.isLoading} fallback={<LoaderSpinner />} keyed>
                 {props.text}
-            </button>
-        </Show>
-
+            </Show>
+        </button>
     );
 };
