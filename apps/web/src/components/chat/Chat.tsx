@@ -1,9 +1,9 @@
 import ChatHeader from "./ChatHeader";
 import ChatForm from "./ChatForm";
-import { useUserStore } from "../../store/auth";
+import { useAuthStore } from "../../store/auth";
 
 const Chat = () => {
-    const [user] = useUserStore();
+    const [user] = useAuthStore();
 
     return (
         <div class="flex flex-col flex-auto flex-shrink-0 h-full bg-surface0">

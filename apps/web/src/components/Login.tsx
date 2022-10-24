@@ -1,4 +1,4 @@
-import { useUserStore } from "../store/auth";
+import { useAuthStore } from "../store/auth";
 import { createResource, Show, Signal } from "solid-js";
 import { http } from "../http";
 import { Button } from "./common/Button";
@@ -6,7 +6,7 @@ import { reconcile, unwrap } from "solid-js/store";
 import { User } from "../shared/interfaces";
 
 function storeUser(user: User): Signal<User> {
-    const [store, actions] = useUserStore();
+    const [store, actions] = useAuthStore();
 
     return [
         () => store,
@@ -18,7 +18,7 @@ function storeUser(user: User): Signal<User> {
 }
 
 export const Login = () => {
-    const [user, actions] = useUserStore();
+    const [user, actions] = useAuthStore();
     const [userResource] = createResource(() => user.authenticated, http.Auth.user, {
         initialValue: user,
         storage: storeUser

@@ -13,7 +13,7 @@ type AuthActions = {
 export type AuthContextValue = [AuthStore, AuthActions];
 
 export const AuthContext = createContext();
-export const useUserStore = (): AuthContextValue => useContext<AuthContextValue>(AuthContext);
+export const useAuthStore = (): AuthContextValue => useContext<AuthContextValue>(AuthContext);
 
 export const createAuth = (): [AuthStore, AuthActions] => {
     const defaultUserStore = {
