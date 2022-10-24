@@ -8,12 +8,12 @@ type UserStore = User & { authenticated: boolean };
 type AuthStore = Store<UserStore> | UserStore;
 type AuthActions = {
     setUserAuthenticated: () => void;
-    setUser: (user?: User | false) => void;
+    setUser: (user: User | false) => void;
 };
 export type AuthContextValue = [AuthStore, AuthActions];
 
-export const AuthContext = createContext();
-export const useAuthStore = (): AuthContextValue => useContext<AuthContextValue>(AuthContext);
+export const AuthContext = createContext<AuthContextValue>();
+export const useAuthStore = (): AuthContextValue => useContext(AuthContext) as AuthContextValue;
 
 export const createAuth = (): [AuthStore, AuthActions] => {
     const defaultUserStore = {
