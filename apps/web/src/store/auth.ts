@@ -39,7 +39,7 @@ export const createAuth = (): [AuthStore, AuthActions] => {
                 authenticated: true
             });
         },
-        setUser: (user?: User | false) => {
+        setUser: (user: User | false) => {
             if (!user) {
                 setStore(defaultUserStore)
                 return
