@@ -7,6 +7,6 @@ export function LoginPage() {
             <Login/>
         </>
     );
-};
+}
 
 export default LoginPage;

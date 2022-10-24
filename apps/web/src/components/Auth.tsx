@@ -1,6 +1,10 @@
-import { Suspense } from "solid-js";
+import { JSX, Suspense } from "solid-js";
 
-export const Auth = (props: any) => {
+type AuthProps = {
+    children: JSX.Element
+}
+
+export const Auth = (props: AuthProps) => {
     return (
         <Suspense fallback={<span>app is loading...</span>}>
             {props.children}
