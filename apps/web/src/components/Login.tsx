@@ -5,12 +5,12 @@ import { Button } from "./common/Button";
 import { reconcile, unwrap } from "solid-js/store";
 import { User } from "../shared/interfaces";
 
-function storeUser(user: User): Signal<User> {
+function storeUser<T>(user: T): Signal<T> {
     const [store, actions] = useAuthStore();
 
     return [
-        () => store,
-        (nUser: User) => {
+        (): User => store,
+        (nUser: User): User => {
             actions.setUser(nUser);
             return store;
         }
