@@ -22,6 +22,7 @@ export const http = {
     },
     Channel: {
         fetch: () => req("GET", "/channel", mockChannel, 500),
+        fetchFriends: () => req("GET", "/friends", mockFriends, 500),
     },
 };
 
@@ -79,3 +80,8 @@ const mockChannel = {
         },
     ],
 };
+
+const mockFriends = [{
+    id: 0,
+    name: "factor",
+}]
