@@ -10,12 +10,12 @@ type AuthActions = {
     setUserAuthenticated: () => void;
     setUser: (user: User | false) => void;
 };
-export type AuthContextValue = [AuthStore, AuthActions];
+export type AuthContext = [AuthStore, AuthActions];
 
-export const AuthContext = createContext<AuthContextValue>();
-export const useAuthStore = (): AuthContextValue => useContext(AuthContext) as AuthContextValue;
+export const AuthContext = createContext<AuthContext>();
+export const useAuthStore = (): AuthContext => useContext(AuthContext) as AuthContext;
 
-export const createAuth = (): [AuthStore, AuthActions] => {
+export const createAuth = (): AuthContext => {
     const defaultUserStore = {
         id: Infinity,
         username: "",

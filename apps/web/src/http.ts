@@ -7,7 +7,7 @@ const req = async (
 ) => {
     try {
         const res = await mockRequest(data, timeout);
-        console.log('req');
+        console.log("req");
         return res.data;
     } catch (err) {
         return err;
@@ -18,12 +18,12 @@ export const http = {
     Auth: {
         user: () => req("GET", "/user", mockUser, 500),
         login: () => req("POST", "/login", mockUser, 500),
-        register: () => req("POST", "/register", mockUser, 500),
+        register: () => req("POST", "/register", mockUser, 500)
     },
     Channel: {
         fetch: () => req("GET", "/channel", mockChannel, 500),
-        fetchFriends: () => req("GET", "/friends", mockFriends, 500),
-    },
+        fetchFriends: () => req("GET", "/friends", mockFriends, 500)
+    }
 };
 
 // mock stuff
@@ -49,39 +49,43 @@ const mockChannel = {
     users: [
         {
             id: 1,
-            username: "factor",
+            username: "factor"
         },
         {
             id: 0,
-            username: "averagebit",
-        },
+            username: "averagebit"
+        }
     ],
     messages: [
         {
             user: {
                 id: 1,
-                username: "factor",
+                username: "factor"
             },
-            content: "JS is the best",
+            content: "JS is the best"
         },
         {
             user: {
                 id: 0,
-                username: "averagebit",
+                username: "averagebit"
             },
-            content: "you can't say that...",
+            content: "you can't say that..."
         },
         {
             user: {
                 id: 0,
-                username: "averagebit",
+                username: "averagebit"
             },
-            content: "bash is better",
-        },
-    ],
+            content: "bash is better"
+        }
+    ]
 };
 
-const mockFriends = [{
-    id: 0,
-    name: "factor",
-}]
+const mockFriends = [
+//     {
+//     id: 0,
+//     name: "factor"
+// },
+//     { id: 1, name: "Theo" },
+//     { id: 2, name: "Prime" }
+];

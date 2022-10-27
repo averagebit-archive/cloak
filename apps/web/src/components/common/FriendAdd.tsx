@@ -1,7 +1,15 @@
-const SidebarFriendAdd = () => {
+import { useChatStore } from "../../pages/ChatPage";
+
+type FriendAddProps = {
+    text?: string
+}
+
+const FriendAdd = (props: FriendAddProps) => {
+    const [_, actions] = useChatStore();
+
     return (
-        <div class="flex flex-row items-center justify-between text-sm text-subtext0 pt-4 px-6">
-            <span class="font-bold">FRIENDS</span>
+        <button class="flex flex-row items-center justify-between text-sm text-subtext0" onClick={() => actions.openModal("friendAdd")}>
+            <span>{props.text}</span>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -25,8 +33,8 @@ const SidebarFriendAdd = () => {
                     style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:50px"
                 />
             </svg>
-        </div>
+        </button>
     );
 };
 
-export default SidebarFriendAdd;
+export default FriendAdd;
