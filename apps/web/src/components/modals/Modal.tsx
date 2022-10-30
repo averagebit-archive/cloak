@@ -7,7 +7,7 @@ const Modals = {
 
 export type ModalTypes = keyof typeof Modals;
 
-type ModalProps = {
+export type ModalProps = {
     modalType: ModalTypes | null;
     close: () => void;
 }
@@ -19,7 +19,8 @@ const Modal = (props: ModalProps) => {
                 class="bg-slate-800 bg-opacity-90 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0"
                 onClick={() => props.close()}>
                 <div class="bg-white px-16 py-14 rounded-md text-center" onClick={(e) => e.stopPropagation()}>
-                    <Show when={props.modalType === Modals.friendAdd} children={FriendAddModalView} keyed />
+                    <Show when={props.modalType === Modals.friendAdd} children={<FriendAddModalView {...props} />}
+                          keyed />
                 </div>
             </div>
         </Show>

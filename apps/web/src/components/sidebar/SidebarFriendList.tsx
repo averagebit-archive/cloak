@@ -4,7 +4,8 @@ import { useChatStore } from "../../pages/ChatPage";
 import SidebarFriend from "./SidebarFriend";
 import EmptyFriends from "./EmptyFriends";
 
-type Friend = {
+// TODO: find a better place to have this declared
+export type Friend = {
     id: number,
     name: string
 }

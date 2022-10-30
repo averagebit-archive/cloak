@@ -22,7 +22,8 @@ export const http = {
     },
     Channel: {
         fetch: () => req("GET", "/channel", mockChannel, 500),
-        fetchFriends: () => req("GET", "/friends", mockFriends, 500)
+        fetchFriends: () => req("GET", "/friends", mockFriends, 500),
+        addFriend: (id: string) => req("POST", "/friends", mockFriends2, 500),
     }
 };
 
@@ -82,10 +83,18 @@ const mockChannel = {
 };
 
 const mockFriends = [
-//     {
-//     id: 0,
-//     name: "factor"
-// },
-//     { id: 1, name: "Theo" },
-//     { id: 2, name: "Prime" }
+    {
+    id: 0,
+    name: "factor"
+},
+    { id: 1, name: "Theo" },
+];
+
+const mockFriends2 = [
+    {
+    id: 0,
+    name: "factor"
+},
+    { id: 1, name: "Theo" },
+    { id: 2, name: "Prime" },
 ];
