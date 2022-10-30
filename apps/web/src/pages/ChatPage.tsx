@@ -2,16 +2,16 @@ import { Component, createContext, useContext } from "solid-js";
 import Sidebar from "../components/sidebar/Sidebar";
 import Chat from "../components/chat/Chat";
 import { createStore } from "solid-js/store";
-import Modal from "../components/modals/Modal";
+import Modal, { ModalTypes } from "../components/modals/Modal";
 
 type ChatStore = {
     activeChatChannelID: number;
-    showModal: string | null;
+    showModal: ModalTypes | null;
 };
 
 type ChatStoreActions = {
     setActiveChannel: (id: number) => void;
-    openModal: (modal: string) => void;
+    openModal: (modal: ModalTypes) => void;
     closeModal: () => void;
 };
 export type ChatContext = [ChatStore, ChatStoreActions];
@@ -31,7 +31,7 @@ const ChatPage: Component = () => {
         setActiveChannel(id: number) {
             setStore("activeChatChannelID", id);
         },
-        openModal(modal: string) {
+        openModal(modal: ModalTypes) {
             setStore("showModal", modal);
         },
         closeModal() {
