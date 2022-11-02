@@ -1,37 +1,23 @@
-import {useAuthStore} from "../store/auth";
-import {createResource, Show, Signal} from "solid-js";
-import {http} from "../http";
+import {useAuthStore, useResource} from "../store/auth";
+import {createSignal, Show} from "solid-js";
 import {Button} from "./common/Button";
-import {User} from "../shared/interfaces";
-
-function storeUser<T>(user: T): Signal<T> {
-    const [store, actions] = useAuthStore();
-
-    return [
-        (): User => store,
-        (nUser: User): User => {
-            actions.setUser(nUser);
-            return store;
-        },
-    ] as Signal<T>;
-}
 
 export const Login = () => {
     const [user, actions] = useAuthStore();
-    const [userResource] = createResource(
-        () => user.authenticated,
-        http.Auth.user,
-        {storage: storeUser}
-    );
+    const [authenticated, setAuthenticated] = createSignal(false);
+    const [userResource] = useResource(authenticated);
 
     return (
         <Show
-            when={!user.authenticated}
+            when={!user.token}
             fallback={
                 <Button
                     text="Logout"
                     isLoading={userResource.loading}
-                    callback={() => actions.setUser(false)}
+                    callback={() => {
+                        actions.setUser(false);
+                        setAuthenticated(false);
+                    }}
                 />
             }
             keyed
@@ -39,7 +25,7 @@ export const Login = () => {
             <Button
                 text="Login"
                 isLoading={userResource.loading}
-                callback={actions.setUserAuthenticated}
+                callback={() => setAuthenticated(true)}
             />
         </Show>
     );

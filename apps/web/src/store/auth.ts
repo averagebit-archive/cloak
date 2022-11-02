@@ -1,41 +1,69 @@
 import {Store} from "solid-js/store/types/store";
 import {User} from "../shared/interfaces";
 import {createStore} from "solid-js/store";
-import {createContext, createEffect, useContext} from "solid-js";
+import {
+    createContext,
+    createResource,
+    Signal,
+    useContext,
+} from "solid-js";
+import {http} from "../http";
 
-type UserStore = User & {authenticated: boolean};
+type UserStore = User;
 type AuthStore = Store<UserStore> | UserStore;
 type AuthActions = {
-    setUserAuthenticated: () => void;
     setUser: (user: User | false) => void;
 };
 export type AuthContext = [AuthStore, AuthActions];
 
 export const AuthContext = createContext<AuthContext>();
-export const useAuthStore = (): AuthContext =>
-    useContext(AuthContext) as AuthContext;
+export const useAuthStore = (): AuthContext => {
+    return useContext(AuthContext) as AuthContext;
+};
+
+export const useResource = (signal?: any) => {
+    const storeUser = <T>(user: T) => {
+        const [store, actions] = useAuthStore();
+
+        return [
+            (): User => store,
+            (nUser: User): User => {
+                actions.setUser(nUser);
+                return store;
+            },
+        ] as Signal<T>;
+    };
+
+    if (signal) {
+        return createResource(signal, http.Auth.user, {
+            storage: storeUser,
+        });
+    } else {
+        return createResource(http.Auth.user, {
+            storage: storeUser,
+        });
+    }
+};
 
 export const createAuth = (): AuthContext => {
     const defaultUserStore = {
         id: Infinity,
         username: "",
         token: "",
-        authenticated: false,
     };
 
     // Destructure object because creeateStore mutates the original.
     const [store, setStore] = createStore({...defaultUserStore});
 
-    createEffect(() =>
-        store.token
-            ? localStorage.setItem("token", store.token)
-            : localStorage.removeItem("token")
-    );
-
     const actions: AuthActions = {
-        setUserAuthenticated: () => setStore("authenticated", true),
-        setUser: (user: User | false) =>
-            user ? setStore(user) : setStore(defaultUserStore),
+        setUser: (user: User | false) => {
+            if (user) {
+                localStorage.setItem("token", user().token);
+                setStore(user);
+            } else {
+                setStore(defaultUserStore);
+            }
+        },
     };
 
     return [store, actions];
