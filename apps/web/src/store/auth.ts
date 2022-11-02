@@ -1,13 +1,7 @@
 import {Store} from "solid-js/store/types/store";
 import {User} from "../shared/interfaces";
 import {createStore} from "solid-js/store";
-import {
-    createContext,
-    createEffect,
-    createResource,
-    useContext,
-} from "solid-js";
-import {http} from "../http";
+import {createContext, createEffect, useContext} from "solid-js";
 
 type UserStore = User & {authenticated: boolean};
 type AuthStore = Store<UserStore> | UserStore;
@@ -29,9 +23,8 @@ export const createAuth = (): AuthContext => {
         authenticated: false,
     };
 
-    const [store, setStore] = createStore(defaultUserStore, {
-        name: "user",
-    });
+    // Destructure object because creeateStore mutates the original.
+    const [store, setStore] = createStore({...defaultUserStore});
 
     createEffect(() =>
         store.token

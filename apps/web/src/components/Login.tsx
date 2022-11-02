@@ -2,7 +2,6 @@ import {useAuthStore} from "../store/auth";
 import {createResource, Show, Signal} from "solid-js";
 import {http} from "../http";
 import {Button} from "./common/Button";
-import {reconcile, unwrap} from "solid-js/store";
 import {User} from "../shared/interfaces";
 
 function storeUser<T>(user: T): Signal<T> {
@@ -22,10 +21,7 @@ export const Login = () => {
     const [userResource] = createResource(
         () => user.authenticated,
         http.Auth.user,
-        {
-            initialValue: user,
-            storage: storeUser,
-        }
+        {storage: storeUser}
     );
 
     return (
