@@ -1,6 +1,6 @@
-import { Component } from "solid-js";
-import { useAuthStore } from "../store/auth";
-import { Login } from "../components/Login";
+import {Component} from "solid-js";
+import {useAuthStore} from "../store/auth";
+import {Login} from "../components/Login";
 
 const HomePage: Component = () => {
     const [user] = useAuthStore();

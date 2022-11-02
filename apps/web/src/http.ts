@@ -18,13 +18,14 @@ export const http = {
     Auth: {
         user: () => req("GET", "/user", mockUser, 500),
         login: () => req("POST", "/login", mockUser, 500),
-        register: () => req("POST", "/register", mockUser, 500)
+        register: () => req("POST", "/register", mockUser, 500),
     },
     Channel: {
         fetch: () => req("GET", "/channel", mockChannel, 500),
         fetchFriends: () => req("GET", "/friends", mockFriends, 500),
-        addFriend: (id: string) => req("POST", "/friends", mockFriends2, 500),
-    }
+        addFriend: (id: string) =>
+            req("POST", "/friends", mockFriends2, 500),
+    },
 };
 
 // mock stuff
@@ -34,7 +35,7 @@ const mockRequest = (data: any, timeout?: number) => {
             if (data.error) {
                 reject(new Error(data.error));
             }
-            resolve({ data: data });
+            resolve({data: data});
         }, timeout || 250);
     });
 };
@@ -42,7 +43,7 @@ const mockRequest = (data: any, timeout?: number) => {
 const mockUser = {
     id: 0,
     username: "averagebit",
-    token: "jwt-token"
+    token: "jwt-token",
 };
 
 const mockChannel = {
@@ -50,51 +51,51 @@ const mockChannel = {
     users: [
         {
             id: 1,
-            username: "factor"
+            username: "factor",
         },
         {
             id: 0,
-            username: "averagebit"
-        }
+            username: "averagebit",
+        },
     ],
     messages: [
         {
             user: {
                 id: 1,
-                username: "factor"
+                username: "factor",
             },
-            content: "JS is the best"
+            content: "JS is the best",
         },
         {
             user: {
                 id: 0,
-                username: "averagebit"
+                username: "averagebit",
             },
-            content: "you can't say that..."
+            content: "you can't say that...",
         },
         {
             user: {
                 id: 0,
-                username: "averagebit"
+                username: "averagebit",
             },
-            content: "bash is better"
-        }
-    ]
+            content: "bash is better",
+        },
+    ],
 };
 
 const mockFriends = [
     {
-    id: 0,
-    name: "factor"
-},
-    { id: 1, name: "Theo" },
+        id: 0,
+        name: "factor",
+    },
+    {id: 1, name: "Theo"},
 ];
 
 const mockFriends2 = [
     {
-    id: 0,
-    name: "factor"
-},
-    { id: 1, name: "Theo" },
-    { id: 2, name: "Prime" },
+        id: 0,
+        name: "factor",
+    },
+    {id: 1, name: "Theo"},
+    {id: 2, name: "Prime"},
 ];

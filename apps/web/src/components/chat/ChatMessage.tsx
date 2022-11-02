@@ -1,8 +1,9 @@
-import { Component } from "solid-js";
+import {Component} from "solid-js";
 
-export const ChatMessage: Component<{ username: string; content: string }> = (
-    props
-) => {
+export const ChatMessage: Component<{
+    username: string;
+    content: string;
+}> = (props) => {
     return (
         <div class="flex flex-row items-center pb-4">
             <div class="flex flex-shrink-0 items-center justify-center h-10 w-10 font-semibold text-white rounded-full bg-overlay0">

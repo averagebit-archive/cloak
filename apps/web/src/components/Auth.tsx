@@ -1,8 +1,8 @@
-import { JSX, Suspense } from "solid-js";
+import {JSX, Suspense} from "solid-js";
 
 type AuthProps = {
-    children: JSX.Element
-}
+    children: JSX.Element;
+};
 
 export const Auth = (props: AuthProps) => {
     return (

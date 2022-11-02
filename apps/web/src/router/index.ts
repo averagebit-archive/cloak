@@ -1,5 +1,5 @@
-import { lazy } from "solid-js";
-import { RouteDefinition } from "@solidjs/router";
+import {lazy} from "solid-js";
+import {RouteDefinition} from "@solidjs/router";
 
 const routes: RouteDefinition[] = [
     {
@@ -22,6 +22,6 @@ const routes: RouteDefinition[] = [
     },
 ];
 
-export { routes };
+export {routes};
 
 export default routes;

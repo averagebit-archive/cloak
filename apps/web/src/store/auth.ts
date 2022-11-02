@@ -1,10 +1,15 @@
-import { Store } from "solid-js/store/types/store";
-import { User } from "../shared/interfaces";
-import { createStore } from "solid-js/store";
-import { createContext, createEffect, createResource, useContext } from "solid-js";
-import { http } from "../http";
+import {Store} from "solid-js/store/types/store";
+import {User} from "../shared/interfaces";
+import {createStore} from "solid-js/store";
+import {
+    createContext,
+    createEffect,
+    createResource,
+    useContext,
+} from "solid-js";
+import {http} from "../http";
 
-type UserStore = User & { authenticated: boolean };
+type UserStore = User & {authenticated: boolean};
 type AuthStore = Store<UserStore> | UserStore;
 type AuthActions = {
     setUserAuthenticated: () => void;
@@ -13,27 +18,31 @@ type AuthActions = {
 export type AuthContext = [AuthStore, AuthActions];
 
 export const AuthContext = createContext<AuthContext>();
-export const useAuthStore = (): AuthContext => useContext(AuthContext) as AuthContext;
+export const useAuthStore = (): AuthContext =>
+    useContext(AuthContext) as AuthContext;
 
 export const createAuth = (): AuthContext => {
     const defaultUserStore = {
         id: Infinity,
         username: "",
         token: "",
-        authenticated: false
+        authenticated: false,
     };
 
     const [store, setStore] = createStore(defaultUserStore, {
-        name: "user"
+        name: "user",
     });
 
-    createEffect(() => store.token
-        ? localStorage.setItem("token", store.token)
-        : localStorage.removeItem("token"));
+    createEffect(() =>
+        store.token
+            ? localStorage.setItem("token", store.token)
+            : localStorage.removeItem("token")
+    );
 
     const actions: AuthActions = {
         setUserAuthenticated: () => setStore("authenticated", true),
-        setUser: (user: User | false) => user ? setStore(user) : setStore(defaultUserStore)
+        setUser: (user: User | false) =>
+            user ? setStore(user) : setStore(defaultUserStore),
     };
 
     return [store, actions];

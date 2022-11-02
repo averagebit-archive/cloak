@@ -1,6 +1,6 @@
 import ChatHeader from "./ChatHeader";
 import ChatForm from "./ChatForm";
-import { useAuthStore } from "../../store/auth";
+import {useAuthStore} from "../../store/auth";
 
 const Chat = () => {
     const [user] = useAuthStore();

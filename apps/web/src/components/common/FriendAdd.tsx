@@ -1,14 +1,17 @@
-import { useChatStore } from "../../pages/ChatPage";
+import {useChatStore} from "../../pages/ChatPage";
 
 type FriendAddProps = {
-    text?: string
-}
+    text?: string;
+};
 
 const FriendAdd = (props: FriendAddProps) => {
     const [_, actions] = useChatStore();
 
     return (
-        <button class="flex flex-row items-center justify-between text-sm text-subtext0" onClick={() => actions.openModal("friendAdd")}>
+        <button
+            class="flex flex-row items-center justify-between text-sm text-subtext0"
+            onClick={() => actions.openModal("friendAdd")}
+        >
             <span>{props.text}</span>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
