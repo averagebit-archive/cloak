@@ -1,19 +1,24 @@
-import {ModalProps} from "./Modal";
-import {createEffect, createResource, createSignal} from "solid-js";
-import {http} from "../../http";
-import {Button} from "../common/Button";
+import { ModalProps } from "./Modal";
+import {
+    createEffect,
+    createResource,
+    createSignal
+} from "solid-js";
+
+import { http } from "../../http";
+import { Button } from "../common/Button";
 
 type FriendAddModalViewProps = {} & ModalProps;
 
 const FriendAddModalView = (props: FriendAddModalViewProps) => {
     const [hasAdded, setHasAdded] = createSignal(false);
-    const [friendsResource] = createResource(
+    const [addFriendResource] = createResource(
         () => hasAdded(),
         () => http.Channel.addFriend("prime#324")
     );
 
     createEffect(() => {
-        if (hasAdded() && !friendsResource.loading) {
+        if (hasAdded() && !addFriendResource.loading) {
             // TODO: rather than here, use the resource storage to update the store then close the modal
             props.close();
         }
@@ -36,7 +41,7 @@ const FriendAddModalView = (props: FriendAddModalViewProps) => {
 
                 <Button
                     text="Add"
-                    isLoading={friendsResource.loading}
+                    isLoading={addFriendResource.loading}
                     callback={() => setHasAdded(true)}
                 />
             </form>

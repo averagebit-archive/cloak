@@ -1,7 +1,7 @@
 import {Show} from "solid-js";
 import FriendAddModalView from "./FriendAddModalView";
 
-const Modals = {
+export const Modals = {
     friendAdd: "friendAdd",
 } as const;
 

@@ -91,7 +91,7 @@ const mockFriends = [
     {id: 1, name: "Theo"},
 ];
 
-const mockFriends2 = [
+export const mockFriends2 = [
     {
         id: 0,
         name: "factor",
