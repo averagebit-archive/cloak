@@ -10,7 +10,7 @@ import { useChatStore } from "../../pages/ChatPage";
 import SidebarFriend from "./SidebarFriend";
 import EmptyFriends from "./EmptyFriends";
 import { Modals } from "../modals/Modal";
-import { myObservable } from "../modals/FriendAddModalView";
+import { A } from "@solidjs/router";
 
 // TODO: find a better place to have this declared
 export type Friend = {
@@ -20,22 +20,12 @@ export type Friend = {
 
 const SidebarFriendList = () => {
     const [chatStore, actions] = useChatStore();
-    const [friendsResource, {mutate}] = createResource<Friend[]>(
+    const [friendsResource, { mutate }] = createResource<Friend[]>(
         http.Channel.fetchFriends,
         {
             initialValue: []
         }
     );
-
-    // const sig = from(myObservable);
-
-    createEffect((prev) => {
-        if (myObservable) {
-            debugger
-            // TODO: when API available set this refetch();
-           mutate(mockFriends2);
-        }
-    });
 
     return (
         <Show

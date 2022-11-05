@@ -23,6 +23,7 @@ export const http = {
     Channel: {
         fetch: () => req("GET", "/channel", mockChannel, 500),
         fetchFriends: () => req("GET", "/friends", mockFriends, 500),
+        friends2: () => req("GET", "/friends", mockFriends2, 500),
         addFriend: (id: string) =>
             req("POST", "/friends", mockFriends2, 500),
     },

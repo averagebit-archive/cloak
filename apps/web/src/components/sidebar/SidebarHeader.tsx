@@ -1,3 +1,4 @@
+import { A } from "@solidjs/router";
 import FriendAdd from "../common/FriendAdd";
 
 const SidebarHeader = () => {
@@ -5,6 +6,8 @@ const SidebarHeader = () => {
         <div class="flex justify-between items-center border-b-2 border-b-surface0 p-4">
             <span class="text-lg font-semibold text-subtext0">
                 Friends
+
+            <A href="/">App</A>
             </span>
             <FriendAdd />
         </div>

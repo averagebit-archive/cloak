@@ -23,7 +23,7 @@ const FriendAddModalView: Component<FriendAddModalViewProps> = (
     createEffect(() => {
         if (hasAdded() && !addFriendResource.loading) {
             // TODO: rather than here, use the resource storage to update the store then close the modal
-            refetchRouteData(["friends"]);
+            refetchRouteData(["friends2"]);
             props.close();
         }
     });

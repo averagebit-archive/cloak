@@ -1,4 +1,4 @@
-import {Component, createResource, For, Show} from "solid-js";
+import {Component, createComputed, createResource, For, Show} from "solid-js";
 import SidebarFriend from "./SidebarFriend";
 import EmptyFriends from "./EmptyFriends";
 import {useRoomContext} from "~/context";
@@ -13,8 +13,7 @@ export type Friend = {
 const SidebarFriendList: Component = () => {
     const [chatStore, actions] = useRoomContext();
     const {friends} = useRouteData();
-    // console.log(friends());
-
+    createComputed(friends);
     return (
         <Show
             when={!friends.loading}
@@ -23,7 +22,7 @@ const SidebarFriendList: Component = () => {
         >
             <div class="flex flex-col h-full space-y-1 overflow-y-auto pt-2 px-4">
                 <For
-                    each={friends()}
+                    each={chatStore.friends}
                     fallback={EmptyFriends}
                 >
                     {(friend: any) => (
