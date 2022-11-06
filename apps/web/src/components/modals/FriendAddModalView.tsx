@@ -1,32 +1,24 @@
 import {ModalProps} from "./Modal";
-import {
-    Component,
-    createEffect,
-    createResource,
-    createSignal,
-} from "solid-js";
+import {Component} from "solid-js";
 import {http} from "~/services";
 import {Button} from "../common/Button";
-import {refetchRouteData} from "solid-start";
+import {createRouteAction} from "solid-start";
 
 type FriendAddModalViewProps = {} & ModalProps;
 
 const FriendAddModalView: Component<FriendAddModalViewProps> = (
     props: FriendAddModalViewProps
 ) => {
-    const [hasAdded, setHasAdded] = createSignal(false);
-    const [addFriendResource] = createResource(
-        () => hasAdded(),
-        () => http.Channel.addFriend("prime#324")
+    const [addingFriend, addFriend] = createRouteAction(
+        async () => {
+            console.log("addingFriend");
+            await http.addFriend({
+                id: 4,
+                name: "theo",
+            });
+        },
+        {invalidate: ["friends"]}
     );
-
-    createEffect(() => {
-        if (hasAdded() && !addFriendResource.loading) {
-            // TODO: rather than here, use the resource storage to update the store then close the modal
-            refetchRouteData(["friends2"]);
-            props.close();
-        }
-    });
 
     return (
         <>
@@ -45,8 +37,8 @@ const FriendAddModalView: Component<FriendAddModalViewProps> = (
 
                 <Button
                     text="Add"
-                    isLoading={addFriendResource.loading}
-                    callback={() => setHasAdded(true)}
+                    isLoading={addingFriend.pending}
+                    callback={() => addFriend()}
                 />
             </form>
         </>
