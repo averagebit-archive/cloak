@@ -1,10 +1,14 @@
-import {Component} from "solid-js";
+import {Component, Resource} from "solid-js";
 import {createRouteData, Title} from "solid-start";
 // import Chat from "~/components/chat/Chat";
 import Modal from "~/components/modals/Modal";
 import Sidebar from "~/components/sidebar/Sidebar";
 import {useRoomContext} from "~/context";
 import {Friend, FriendType, http} from "~/services";
+
+export type MeRouteData = {
+    friends: Resource<FriendType[]>;
+};
 
 export const routeData = () => {
     const [, actions] = useRoomContext();

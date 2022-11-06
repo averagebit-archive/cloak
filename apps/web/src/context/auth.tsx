@@ -12,7 +12,9 @@ type AuthContext = [AuthStore, AuthStoreActions];
 
 const AuthContext = createContext<AuthContext>();
 
-const AuthProvider = (props: UserType): JSX.Element => {
+const AuthProvider = (
+    props: {children: JSX.Element} & UserType
+): JSX.Element => {
     const initialValue = {
         id: Infinity,
         username: "",
