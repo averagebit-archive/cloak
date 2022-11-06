@@ -1,7 +1,7 @@
-import {createContext, JSX, useContext} from "solid-js";
-import {createStore} from "solid-js/store";
-import {ModalTypes} from "~/components/modals/Modal";
-import {FriendType} from "~/services";
+import { createContext, JSX, useContext } from "solid-js";
+import { createStore } from "solid-js/store";
+import { ModalTypes } from "~/components/modals/Modal";
+import { FriendType } from "~/services";
 
 type RoomStore = {
     activeRoomID: number;
@@ -20,11 +20,11 @@ type RoomContext = [RoomStore, RoomStoreActions];
 
 const RoomContext = createContext<RoomContext>();
 
-const RoomProvider = (props: any): JSX.Element => {
+const RoomProvider = (props: { children: JSX.Element }): JSX.Element => {
     const [store, setStore] = createStore<RoomStore>({
         activeRoomID: 0,
         showModal: null,
-        friends: [],
+        friends: []
     });
 
     const actions: RoomStoreActions = {
@@ -39,7 +39,7 @@ const RoomProvider = (props: any): JSX.Element => {
         },
         closeModal: () => {
             setStore("showModal", null);
-        },
+        }
     };
 
     return (
@@ -54,4 +54,4 @@ const useRoomContext = (): RoomContext => {
     return useContext(RoomContext) as RoomContext;
 };
 
-export {RoomProvider, useRoomContext};
+export { RoomProvider, useRoomContext };

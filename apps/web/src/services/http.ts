@@ -14,7 +14,7 @@ export const Friend = User.merge(z.object({}));
 export type UserType = z.infer<typeof User>;
 export type FriendType = z.infer<typeof Friend>;
 
-const r = async (method: string, url: string, data?: any) => {
+const r = async (method: string, url: string, data?: unknown) => {
     console.info("CLOAK_API", method, url);
 
     const headers = {};

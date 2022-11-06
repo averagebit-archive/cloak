@@ -3,6 +3,7 @@ import SidebarFriend from "./SidebarFriend";
 import EmptyFriends from "./EmptyFriends";
 import {useRoomContext} from "~/context";
 import {useRouteData} from "solid-start";
+import { FriendType } from "~/services";
 
 const SidebarFriendList: Component = () => {
     const [chatStore, actions] = useRoomContext();
@@ -20,7 +21,7 @@ const SidebarFriendList: Component = () => {
                     each={chatStore.friends}
                     fallback={EmptyFriends}
                 >
-                    {(friend: any) => (
+                    {(friend: FriendType) => (
                         <SidebarFriend
                             active={
                                 chatStore.activeRoomID === friend.id

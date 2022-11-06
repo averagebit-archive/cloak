@@ -4,12 +4,12 @@ import {createRouteData, Title} from "solid-start";
 import Modal from "~/components/modals/Modal";
 import Sidebar from "~/components/sidebar/Sidebar";
 import {useRoomContext} from "~/context";
-import { Friend, http } from "~/services";
+import { Friend, FriendType, http } from "~/services";
 
 export const routeData = () => {
     const [, actions] = useRoomContext();
 
-    const friends = createRouteData(
+    const friendsResource = createRouteData<FriendType[], unknown>(
         async () => {
             const friendsRes = await http.getFriends();
             Friend.array().parse(friendsRes);
@@ -17,10 +17,15 @@ export const routeData = () => {
             return friendsRes;
         },
         {key: ["friends"]}
-    ) as any;
+    );
 
-    actions.setFriends(friends());
-    return {friends};
+    const friends = friendsResource();
+
+    if(friends) {
+        actions.setFriends(friends);
+    }
+
+    return {friends: friendsResource};
 };
 
 const RouteMe: Component = () => {
