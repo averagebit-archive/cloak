@@ -1,34 +1,34 @@
 {
     "me": {
         "id": 1,
-        "username": "averagebit"
+        "name": "averagebit"
     },
     "users": [
         {
             "id": 1,
-            "username": "averagebit"
+            "name": "averagebit"
         },
         {
             "id": 2,
-            "username": "factor"
+            "name": "factor"
         },
         {
             "id": 3,
-            "username": "prime"
+            "name": "prime"
         },
         {
             "id": 4,
-            "username": "theo"
+            "name": "theo"
         }
     ],
     "friends": [
         {
             "id": 2,
-            "username": "factor"
+            "name": "factor"
         },
         {
             "id": 3,
-            "username": "prime"
+            "name": "prime"
         }
     ],
     "rooms": [
@@ -41,25 +41,25 @@
             "users": [
                 {
                     "id": 2,
-                    "username": "factor"
+                    "name": "factor"
                 },
                 {
                     "id": 3,
-                    "username": "prime"
+                    "name": "prime"
                 }
             ],
             "messages": [
                 {
                     "user": {
                         "id": 1,
-                        "username": "averagebit"
+                        "name": "averagebit"
                     },
                     "content": "foo"
                 },
                 {
                     "user": {
                         "id": 2,
-                        "username": "factor"
+                        "name": "factor"
                     },
                     "content": "bar"
                 }
@@ -74,15 +74,15 @@
             "users": [
                 {
                     "id": 1,
-                    "username": "averagebit"
+                    "name": "averagebit"
                 },
                 {
                     "id": 2,
-                    "username": "factor"
+                    "name": "factor"
                 },
                 {
                     "id": 3,
-                    "username": "prime"
+                    "name": "prime"
                 }
             ],
             "messages": [
