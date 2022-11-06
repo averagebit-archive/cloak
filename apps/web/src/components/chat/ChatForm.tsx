@@ -1,8 +1,9 @@
+import {Component} from "solid-js";
 import ChatFormAttachments from "./ChatFormAttachments";
-import ChatFormInput from "./ChatFormInput";
 import ChatFormExpressions from "./ChatFormExpressions";
+import ChatFormInput from "./ChatFormInput";
 
-const ChatForm = () => {
+const ChatForm: Component = () => {
     // TODO: wrap in a form to submit messages
     return (
         <div class="px-4 pb-4">

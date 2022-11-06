@@ -1,16 +1,8 @@
-import {
-    createEffect,
-    createResource,
-    For,
-    from,
-    Show
-} from "solid-js";
-import { http, mockFriends2 } from "../../http";
-import { useChatStore } from "../../pages/ChatPage";
+import {Component, createComputed, For, Show} from "solid-js";
 import SidebarFriend from "./SidebarFriend";
 import EmptyFriends from "./EmptyFriends";
-import { Modals } from "../modals/Modal";
-import { A } from "@solidjs/router";
+import {useRoomContext} from "~/context";
+import {useRouteData} from "solid-start";
 
 // TODO: find a better place to have this declared
 export type Friend = {
@@ -18,36 +10,30 @@ export type Friend = {
     name: string;
 };
 
-const SidebarFriendList = () => {
-    const [chatStore, actions] = useChatStore();
-    const [friendsResource, { mutate }] = createResource<Friend[]>(
-        http.Channel.fetchFriends,
-        {
-            initialValue: []
-        }
-    );
+const SidebarFriendList: Component = () => {
+    const [chatStore, actions] = useRoomContext();
+    const {friends} = useRouteData();
+    createComputed(friends);
 
     return (
         <Show
-            when={!friendsResource.loading}
+            when={!friends.loading && chatStore.friends}
             fallback={<span>Loading</span>}
             keyed
         >
-            <div
-                class="flex flex-col h-full space-y-1 overflow-y-auto pt-2 px-4">
+            <div class="flex flex-col h-full space-y-1 overflow-y-auto pt-2 px-4">
                 <For
-                    each={friendsResource()}
+                    each={chatStore.friends}
                     fallback={EmptyFriends}
                 >
                     {(friend: any) => (
                         <SidebarFriend
                             active={
-                                chatStore.activeChatChannelID ===
-                                friend.id
+                                chatStore.activeRoomID === friend.id
                             }
                             name={friend.name}
                             click={() =>
-                                actions.setActiveChannel(friend.id)
+                                actions.setActiveRoom(friend.id)
                             }
                         />
                     )}

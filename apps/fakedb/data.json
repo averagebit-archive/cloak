@@ -1,0 +1,100 @@
+{
+    "me": {
+        "id": 1,
+        "username": "averagebit"
+    },
+    "users": [
+        {
+            "id": 1,
+            "username": "averagebit"
+        },
+        {
+            "id": 2,
+            "username": "factor"
+        },
+        {
+            "id": 3,
+            "username": "prime"
+        },
+        {
+            "id": 4,
+            "username": "theo"
+        }
+    ],
+    "friends": [
+        {
+            "id": 2,
+            "username": "factor"
+        },
+        {
+            "id": 3,
+            "username": "prime"
+        }
+    ],
+    "rooms": [
+        {
+            "id": 1,
+            "space": {
+                "name": "me"
+            },
+            "name": "me",
+            "users": [
+                {
+                    "id": 2,
+                    "username": "factor"
+                },
+                {
+                    "id": 3,
+                    "username": "prime"
+                }
+            ],
+            "messages": [
+                {
+                    "user": {
+                        "id": 1,
+                        "username": "averagebit"
+                    },
+                    "content": "foo"
+                },
+                {
+                    "user": {
+                        "id": 2,
+                        "username": "factor"
+                    },
+                    "content": "bar"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "space": {
+                "name": "Codewithluke"
+            },
+            "name": "chat",
+            "users": [
+                {
+                    "id": 1,
+                    "username": "averagebit"
+                },
+                {
+                    "id": 2,
+                    "username": "factor"
+                },
+                {
+                    "id": 3,
+                    "username": "prime"
+                }
+            ],
+            "messages": [
+                {
+                    "user": 1,
+                    "content": "foo"
+                },
+                {
+                    "user": 2,
+                    "content": "bar"
+                }
+            ]
+        }
+    ]
+}

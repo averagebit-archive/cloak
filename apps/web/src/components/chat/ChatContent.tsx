@@ -1,6 +1,6 @@
-import {Suspense, For, Component, Show} from "solid-js";
+import {Component, For, Show} from "solid-js";
+import {ChannelMessage} from "~/types";
 import {ChatMessage} from "./ChatMessage";
-import {ChannelMessage} from "../../shared/interfaces";
 
 type ChatContentProps = {
     messages: ChannelMessage[];

@@ -1,16 +1,19 @@
-import { ModalProps } from "./Modal";
+import {ModalProps} from "./Modal";
 import {
+    Component,
     createEffect,
     createResource,
-    createSignal
+    createSignal,
 } from "solid-js";
-
-import { http } from "../../http";
-import { Button } from "../common/Button";
+import {http} from "~/services";
+import {Button} from "../common/Button";
+import {refetchRouteData} from "solid-start";
 
 type FriendAddModalViewProps = {} & ModalProps;
 
-const FriendAddModalView = (props: FriendAddModalViewProps) => {
+const FriendAddModalView: Component<FriendAddModalViewProps> = (
+    props: FriendAddModalViewProps
+) => {
     const [hasAdded, setHasAdded] = createSignal(false);
     const [addFriendResource] = createResource(
         () => hasAdded(),
@@ -20,6 +23,7 @@ const FriendAddModalView = (props: FriendAddModalViewProps) => {
     createEffect(() => {
         if (hasAdded() && !addFriendResource.loading) {
             // TODO: rather than here, use the resource storage to update the store then close the modal
+            refetchRouteData(["friends2"]);
             props.close();
         }
     });

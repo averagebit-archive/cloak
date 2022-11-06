@@ -1,4 +1,6 @@
-const ChatFormExpressions = () => {
+import {Component} from "solid-js";
+
+const ChatFormExpressions: Component = () => {
     return (
         <button class="flex items-center justify-center text-subtext0 hover:text-text">
             <svg

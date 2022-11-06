@@ -1,4 +1,6 @@
-export const LoaderSpinner = () => {
+import {Component} from "solid-js";
+
+export const LoaderSpinner: Component = () => {
     return (
         <svg
             aria-hidden="true"

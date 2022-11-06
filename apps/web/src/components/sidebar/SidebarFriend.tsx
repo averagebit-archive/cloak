@@ -1,4 +1,14 @@
-const SidebarFriend = (props: any) => {
+import {Component} from "solid-js";
+
+type SidebarFriendProps = {
+    name: string;
+    active: boolean;
+    click: () => void;
+};
+
+const SidebarFriend: Component<SidebarFriendProps> = (
+    props: SidebarFriendProps
+) => {
     return (
         <button
             class="flex flex-row items-center hover:bg-surface0 rounded-md p-2 text-subtext0"

@@ -1,4 +1,4 @@
-import {Show} from "solid-js";
+import {Component, Show} from "solid-js";
 import FriendAddModalView from "./FriendAddModalView";
 
 export const Modals = {
@@ -12,7 +12,7 @@ export type ModalProps = {
     close: () => void;
 };
 
-const Modal = (props: ModalProps) => {
+const Modal: Component<ModalProps> = (props: ModalProps) => {
     return (
         <Show
             when={props.modalType}

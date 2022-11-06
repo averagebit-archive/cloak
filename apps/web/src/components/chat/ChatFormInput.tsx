@@ -1,4 +1,6 @@
-const ChatFormInput = () => {
+import {Component} from "solid-js";
+
+const ChatFormInput: Component = () => {
     return (
         <input
             type="text"

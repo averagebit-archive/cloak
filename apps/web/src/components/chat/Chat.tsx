@@ -1,9 +1,10 @@
+import {Component} from "solid-js";
 import ChatHeader from "./ChatHeader";
 import ChatForm from "./ChatForm";
-import {useAuthStore} from "../../store/auth";
+import {useAuthContext} from "~/context/auth";
 
-const Chat = () => {
-    const [user] = useAuthStore();
+const Chat: Component = () => {
+    const [user] = useAuthContext();
 
     return (
         <div class="flex flex-col flex-auto flex-shrink-0 h-full bg-surface0">

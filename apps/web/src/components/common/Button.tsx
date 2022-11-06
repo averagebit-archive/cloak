@@ -1,4 +1,4 @@
-import {Show} from "solid-js";
+import {Component, Show} from "solid-js";
 import {LoaderSpinner} from "./LoaderSpinner";
 
 export type ButtonProps = {
@@ -7,7 +7,7 @@ export type ButtonProps = {
     isLoading?: boolean;
 };
 
-export const Button = (props: ButtonProps) => {
+export const Button: Component<ButtonProps> = (props: ButtonProps) => {
     return (
         <button
             onClick={() => props.callback()}

@@ -1,11 +1,11 @@
-import {useChatStore} from "../../pages/ChatPage";
+import {useRoomContext} from "~/context";
 
 type FriendAddProps = {
     text?: string;
 };
 
 const FriendAdd = (props: FriendAddProps) => {
-    const [_, actions] = useChatStore();
+    const [_, actions] = useRoomContext();
 
     return (
         <button
