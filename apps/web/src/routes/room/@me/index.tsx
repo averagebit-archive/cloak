@@ -1,10 +1,10 @@
-import { Component } from "solid-js";
-import { createRouteData, Title } from "solid-start";
+import {Component} from "solid-js";
+import {createRouteData, Title} from "solid-start";
 // import Chat from "~/components/chat/Chat";
 import Modal from "~/components/modals/Modal";
 import Sidebar from "~/components/sidebar/Sidebar";
-import { useRoomContext } from "~/context";
-import { http } from "~/services";
+import {useRoomContext} from "~/context";
+import {http} from "~/services";
 
 export const routeData = () => {
     const [, actions] = useRoomContext();
@@ -15,11 +15,11 @@ export const routeData = () => {
             actions.setFriends(friendsRes);
             return friendsRes;
         },
-        { key: ["friends"] }
+        {key: ["friends"]}
     ) as any;
 
     actions.setFriends(friends());
-    return { friends };
+    return {friends};
 };
 
 const RouteMe: Component = () => {
