@@ -1,7 +1,7 @@
 const API_URL = "http://localhost:5000";
 
 const r = async (method: string, url: string, data?: any) => {
-    console.info(method, url);
+    console.info("CLOAK_API", method, url);
 
     const headers = {};
     const opts = {method, headers};
@@ -13,8 +13,7 @@ const r = async (method: string, url: string, data?: any) => {
 
     try {
         const res = await fetch(API_URL + url, opts);
-        const data = await res.json();
-        return data;
+        return await res.json();
     } catch (err) {
         return err;
     }
