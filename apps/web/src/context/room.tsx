@@ -1,7 +1,7 @@
 import {createContext, JSX, useContext} from "solid-js";
 import {createStore} from "solid-js/store";
 import {ModalTypes} from "~/components/modals/Modal";
-import { FriendType } from "~/services";
+import {FriendType} from "~/services";
 
 type RoomStore = {
     activeRoomID: number;

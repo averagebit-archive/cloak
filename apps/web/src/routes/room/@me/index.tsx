@@ -29,8 +29,7 @@ const RouteMe: Component = () => {
     return (
         <>
             <Title>Cloak | Friends</Title>
-            <div
-                class="flex flex-row h-full w-full overflow-x-hidden antialiased bg-base text-text">
+            <div class="flex flex-row h-full w-full overflow-x-hidden antialiased bg-base text-text">
                 <Modal
                     modalType={state.showModal}
                     close={actions.closeModal}

@@ -26,14 +26,24 @@ const FriendAdd = (props: FriendAddProps) => {
                     y1="112"
                     x2="256"
                     y2="400"
-                    style={{"fill":"none","stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"50px"}}
+                    style={{
+                        "fill": "none",
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "round",
+                        "stroke-width": "50px",
+                    }}
                 />
                 <line
                     x1="400"
                     y1="256"
                     x2="112"
                     y2="256"
-                    style={{"fill":"none","stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"50px"}}
+                    style={{
+                        "fill": "none",
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "round",
+                        "stroke-width": "50px",
+                    }}
                 />
             </svg>
         </button>
