@@ -16,17 +16,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout codebase.
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
         with:
           path: cloak
 
+      - name: Install pnpm and dependencies.
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7.13.2
+          run_install: |
+            - recursive: true
+
       - name: Format codebase.
-        run: |
-          pnpm format
+        run: pnpm format
 
       - name: Lint codebase.
-        run: |
-          pnpm lint
+        run: pnpm lint
 
       - name: Push changes.
         run: |
