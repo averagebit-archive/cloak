@@ -4,7 +4,7 @@ import {createRouteData, Title} from "solid-start";
 import Modal from "~/components/modals/Modal";
 import Sidebar from "~/components/sidebar/Sidebar";
 import {useRoomContext} from "~/context";
-import { Friend, http } from "~/services";
+import {Friend, http} from "~/services";
 
 export const routeData = () => {
     const [, actions] = useRoomContext();
