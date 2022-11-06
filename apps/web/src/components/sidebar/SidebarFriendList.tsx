@@ -3,7 +3,7 @@ import SidebarFriend from "./SidebarFriend";
 import EmptyFriends from "./EmptyFriends";
 import {useRoomContext} from "~/context";
 import {useRouteData} from "solid-start";
-import { FriendType } from "~/services";
+import {FriendType} from "~/services";
 
 const SidebarFriendList: Component = () => {
     const [chatStore, actions] = useRoomContext();
@@ -19,7 +19,7 @@ const SidebarFriendList: Component = () => {
             <div class="flex flex-col h-full space-y-1 overflow-y-auto pt-2 px-4">
                 <For
                     each={chatStore.friends}
-                    fallback={EmptyFriends}
+                    fallback={<EmptyFriends />}
                 >
                     {(friend: FriendType) => (
                         <SidebarFriend
