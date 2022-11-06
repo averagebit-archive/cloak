@@ -9,7 +9,7 @@ export const User = z
     })
     .strict();
 
-export const Friend = User.merge(z.object({}));
+export const Friend = User.merge(z.object({})).strict();
 
 export type UserType = z.infer<typeof User>;
 export type FriendType = z.infer<typeof Friend>;
