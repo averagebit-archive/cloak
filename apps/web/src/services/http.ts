@@ -1,11 +1,13 @@
-import { z } from "zod";
+import {z} from "zod";
 
 const API_URL = "http://localhost:5000";
 
-export const User = z.object({
-    id: z.number(),
-    name: z.string()
-}).strict();
+export const User = z
+    .object({
+        id: z.number(),
+        name: z.string(),
+    })
+    .strict();
 
 export const Friend = User.merge(z.object({}));
 
@@ -16,7 +18,7 @@ const r = async (method: string, url: string, data?: any) => {
     console.info("CLOAK_API", method, url);
 
     const headers = {};
-    const opts = { method, headers };
+    const opts = {method, headers};
 
     if (data !== undefined) {
         // @ts-ignore
@@ -36,5 +38,6 @@ const r = async (method: string, url: string, data?: any) => {
 export const http = {
     me: (): Promise<UserType> => r("GET", "/user"),
     getFriends: (): Promise<FriendType[]> => r("GET", "/friends"),
-    addFriend: (userID: number): Promise<FriendType> => r("POST", "/friends", userID)
+    addFriend: (userID: number): Promise<FriendType> =>
+        r("POST", "/friends", userID),
 };
