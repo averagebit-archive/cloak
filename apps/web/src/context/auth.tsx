@@ -2,7 +2,7 @@ import {Store} from "solid-js/store/types/store";
 import {createStore} from "solid-js/store";
 import {createContext, JSX, useContext} from "solid-js";
 import {User} from "~/types";
-import { UserType } from "~/services";
+import {UserType} from "~/services";
 
 type AuthStore = Store<User> | User;
 type AuthStoreActions = {
