@@ -1,0 +1,43 @@
+---
+name: CI
+
+on: push
+
+permissions:
+  contents: write
+
+defaults:
+  run:
+    working-directory: cloak
+
+jobs:
+  lint:
+    name: Lint and format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout codebase.
+        uses: actions/checkout@v3
+        with:
+          path: cloak
+
+      - name: Install pnpm and dependencies.
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7.13.2
+          run_install: |
+            - recursive: true
+
+      - name: Format codebase.
+        run: pnpm format
+
+      - name: Lint codebase.
+        run: pnpm lint
+
+      - name: Push changes.
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! [[ -z $(git status -s) ]]; then
+            git commit -am "chore: format codebase"
+            git push
+          fi
