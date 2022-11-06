@@ -1,8 +1,8 @@
-import {ModalProps} from "./Modal";
-import {Component} from "solid-js";
-import {http} from "~/services";
-import {Button} from "../common/Button";
-import {createRouteAction} from "solid-start";
+import { ModalProps } from "./Modal";
+import { Component } from "solid-js";
+import { http } from "~/services";
+import { Button } from "../common/Button";
+import { createRouteAction } from "solid-start";
 
 type FriendAddModalViewProps = {} & ModalProps;
 
@@ -12,12 +12,9 @@ const FriendAddModalView: Component<FriendAddModalViewProps> = (
     const [addingFriend, addFriend] = createRouteAction(
         async () => {
             console.log("addingFriend");
-            await http.addFriend({
-                id: 4,
-                name: "theo",
-            });
+            await http.addFriend(4);
         },
-        {invalidate: ["friends"]}
+        { invalidate: ["friends"] }
     );
 
     return (

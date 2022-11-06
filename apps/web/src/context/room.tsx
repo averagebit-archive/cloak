@@ -1,19 +1,21 @@
 import {createContext, JSX, useContext} from "solid-js";
 import {createStore} from "solid-js/store";
 import {ModalTypes} from "~/components/modals/Modal";
-import {Friend} from "~/components/sidebar/SidebarFriendList";
+import { FriendType } from "~/services";
 
 type RoomStore = {
     activeRoomID: number;
     showModal: ModalTypes | null;
-    friends: Friend[];
+    friends: FriendType[];
 };
+
 type RoomStoreActions = {
     setActiveRoom: (id: number) => void;
     openModal: (modal: ModalTypes) => void;
     closeModal: () => void;
-    setFriends: (friends: Friend[]) => void;
+    setFriends: (friends: FriendType[]) => void;
 };
+
 type RoomContext = [RoomStore, RoomStoreActions];
 
 const RoomContext = createContext<RoomContext>();

@@ -4,15 +4,9 @@ import EmptyFriends from "./EmptyFriends";
 import {useRoomContext} from "~/context";
 import {useRouteData} from "solid-start";
 
-// TODO: find a better place to have this declared
-export type Friend = {
-    id: number;
-    name: string;
-};
-
 const SidebarFriendList: Component = () => {
     const [chatStore, actions] = useRoomContext();
-    const {friends} = useRouteData();
+    const {friends} = useRouteData<any>();
     createComputed(friends);
 
     return (

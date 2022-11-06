@@ -13,6 +13,7 @@
         "format": "prettier --write \"**/*.{js,jsx,ts,tsx,md}\""
     },
     "devDependencies": {
+        "@catppuccin/tailwindcss": "^0.1.1",
         "@typescript-eslint/parser": "^5.40.0",
         "eslint": "^8.25.0",
         "eslint-config-prettier": "^8.5.0",
@@ -25,6 +26,5 @@
     "engines": {
         "node": ">=14.0.0"
     },
-    "dependencies": {},
     "packageManager": "pnpm@7.13.2"
 }
