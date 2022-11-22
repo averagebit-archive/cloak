@@ -1,9 +1,9 @@
-import {Component, For, Show} from "solid-js";
-import {ChannelMessage} from "~/types";
+import {Component, createEffect, For, Show} from "solid-js";
+import {MessageType} from "~/services";
 import {ChatMessage} from "./ChatMessage";
 
 type ChatContentProps = {
-    messages: ChannelMessage[];
+    messages: MessageType[];
 };
 
 export const ChatContent: Component<ChatContentProps> = (
@@ -13,12 +13,13 @@ export const ChatContent: Component<ChatContentProps> = (
         <Show
             when={props.messages.length}
             fallback={<span>loading content</span>}
+            keyed
         >
             <div class="flex flex-col h-full overflow-x-auto p-4">
                 <For each={props.messages}>
                     {(message) => (
                         <ChatMessage
-                            username={message.user.username}
+                            name={message.user.name}
                             content={message.content}
                         />
                     )}

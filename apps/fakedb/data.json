@@ -34,22 +34,24 @@
     "rooms": [
         {
             "id": 1,
+            "name": "factor",
             "space": {
-                "name": "me"
+                "id": 1,
+                "name": "me",
+                "users": [
+                    {
+                        "id": 2,
+                        "name": "factor"
+                    },
+                    {
+                        "id": 3,
+                        "name": "prime"
+                    }
+                ]
             },
-            "name": "me",
-            "users": [
-                {
-                    "id": 2,
-                    "name": "factor"
-                },
-                {
-                    "id": 3,
-                    "name": "prime"
-                }
-            ],
             "messages": [
                 {
+                    "id": 1,
                     "user": {
                         "id": 1,
                         "name": "averagebit"
@@ -57,6 +59,7 @@
                     "content": "foo"
                 },
                 {
+                    "id": 2,
                     "user": {
                         "id": 2,
                         "name": "factor"
@@ -67,32 +70,171 @@
         },
         {
             "id": 2,
-            "space": {
-                "name": "Codewithluke"
-            },
             "name": "chat",
+            "space": {
+                "id": 2,
+                "name": "Codewithluke",
+                "users": [
+                    {
+                        "id": 1,
+                        "name": "averagebit"
+                    },
+                    {
+                        "id": 2,
+                        "name": "factor"
+                    },
+                    {
+                        "id": 3,
+                        "name": "prime"
+                    }
+                ]
+            },
+            "messages": [
+                {
+                    "id": 1,
+                    "user": {
+                        "id": 1,
+                        "name": "averagebit"
+                    },
+                    "content": "foo2"
+                },
+                {
+                    "id": 2,
+                    "user": {
+                        "id": 2,
+                        "name": "factor"
+                    },
+                    "content": "bassr"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "chat",
+            "space": {
+                "id": 3,
+                "name": "Codewithluke",
+                "users": [
+                    {
+                        "id": 1,
+                        "name": "averagebit"
+                    },
+                    {
+                        "id": 2,
+                        "name": "factor"
+                    },
+                    {
+                        "id": 3,
+                        "name": "prime"
+                    }
+                ]
+            },
+            "messages": [
+                {
+                    "id": 1,
+                    "user": {
+                        "id": 1,
+                        "name": "averagebit"
+                    },
+                    "content": "foo"
+                },
+                {
+                    "id": 2,
+                    "user": {
+                        "id": 2,
+                        "name": "factor"
+                    },
+                    "content": "bar"
+                }
+            ]
+        }
+    ],
+    "spaces": [
+        {
+            "id": 1,
+            "name": "me",
             "users": [
                 {
                     "id": 1,
                     "name": "averagebit"
-                },
-                {
-                    "id": 2,
-                    "name": "factor"
-                },
-                {
-                    "id": 3,
-                    "name": "prime"
                 }
             ],
-            "messages": [
+            "rooms": [
                 {
-                    "user": 1,
-                    "content": "foo"
-                },
+                    "id": 1,
+                    "name": "me",
+                    "users": [
+                        {
+                            "id": 2,
+                            "name": "factor"
+                        },
+                        {
+                            "id": 3,
+                            "name": "prime"
+                        }
+                    ],
+                    "messages": [
+                        {
+                            "id": 1,
+                            "user": {
+                                "id": 1,
+                                "name": "averagebit"
+                            },
+                            "content": "foo"
+                        },
+                        {
+                            "id": 2,
+                            "user": {
+                                "id": 2,
+                                "name": "factor"
+                            },
+                            "content": "bar"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Codewithluke",
+            "users": [
                 {
-                    "user": 2,
-                    "content": "bar"
+                    "id": 1,
+                    "name": "averagebit"
+                }
+            ],
+            "rooms": [
+                {
+                    "id": 1,
+                    "name": "me",
+                    "users": [
+                        {
+                            "id": 2,
+                            "name": "factor"
+                        },
+                        {
+                            "id": 3,
+                            "name": "prime"
+                        }
+                    ],
+                    "messages": [
+                        {
+                            "id": 1,
+                            "user": {
+                                "id": 1,
+                                "name": "averagebit"
+                            },
+                            "content": "foo"
+                        },
+                        {
+                            "id": 2,
+                            "user": {
+                                "id": 2,
+                                "name": "factor"
+                            },
+                            "content": "bar"
+                        }
+                    ]
                 }
             ]
         }

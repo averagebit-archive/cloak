@@ -4,16 +4,19 @@ import EmptyFriends from "./EmptyFriends";
 import {useRoomContext} from "~/context";
 import {useRouteData} from "solid-start";
 import {FriendType} from "~/services";
-import {MeRouteData} from "~/routes/room/@me";
+import {MeRouteData} from "~/routes/room/[space_id]";
+import {useNavigate, useParams} from "@solidjs/router";
 
 const SidebarFriendList: Component = () => {
+    const params = useParams();
+    const navigate = useNavigate();
     const [chatStore, actions] = useRoomContext();
-    const {friends} = useRouteData<MeRouteData>();
-    createComputed(friends);
+    const {friendsResource} = useRouteData<MeRouteData>();
+    createComputed(friendsResource);
 
     return (
         <Show
-            when={!friends.loading && chatStore.friends}
+            when={!friendsResource.loading && chatStore.friends}
             fallback={<span>Loading</span>}
             keyed
         >
@@ -24,13 +27,12 @@ const SidebarFriendList: Component = () => {
                 >
                     {(friend: FriendType) => (
                         <SidebarFriend
-                            active={
-                                chatStore.activeRoomID === friend.id
-                            }
+                            active={chatStore.activeRoomID === friend.id}
                             name={friend.name}
-                            click={() =>
-                                actions.setActiveRoom(friend.id)
-                            }
+                            click={() => {
+                                actions.setActiveRoom(friend.id);
+                                navigate(`/room/${params.space_id}/${friend.id}`);
+                            }}
                         />
                     )}
                 </For>

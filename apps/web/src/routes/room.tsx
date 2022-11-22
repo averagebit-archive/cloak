@@ -3,7 +3,7 @@ import {Component} from "solid-js";
 
 const LayoutSpaces: Component = () => {
     return (
-        <div class="flex flex-row h-full w-full overflow-x-hidden antialiased bg-base text-text">
+        <div class="flex flex-row h-screen w-full overflow-x-hidden antialiased bg-base text-text">
             <Outlet />
         </div>
     );
