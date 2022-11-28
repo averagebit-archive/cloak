@@ -2,7 +2,8 @@
     "name": "core",
     "version": "1.0.0",
     "scripts": {
-        "dev": "go build -gcflags=\"all=-N -l\" -o main && ./main"
+        "dev": "go build -gcflags='all=-N -l' -o out/main cmd/cloak/main.go && ./out/main",
+        "seed": "go run cmd/seed/main.go"
     },
     "license": "ISC"
 }
