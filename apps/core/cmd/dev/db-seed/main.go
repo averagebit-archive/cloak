@@ -4,14 +4,14 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/averagebit/cloak/core/internal"
-	"github.com/golang-migrate/migrate/v4"
-	"github.com/golang-migrate/migrate/v4/database/postgres"
-	_ "github.com/golang-migrate/migrate/v4/source/file"
-	_ "github.com/lib/pq"
-	"math/rand"
-	"reflect"
-
 	"github.com/go-faker/faker/v4"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
+	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
+	"log"
+	"math/rand"
+	"os"
+	"reflect"
 )
 
 func createUser() internal.User {
@@ -80,33 +80,18 @@ func createRooms() internal.Room {
 }
 
 func connectedDB() *sql.DB {
-	db, err := sql.Open("postgres", "postgres://postgres:pwd@localhost:5432/database?sslmode=disable")
+	err := godotenv.Load()
+
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	dbHost := os.Getenv("DB_HOST")
+
+	db, err := sql.Open("postgres", dbHost)
 
 	if err != nil {
 		panic(err)
-	}
-
-	driver, err := postgres.WithInstance(db, &postgres.Config{})
-
-	if err != nil {
-		fmt.Println(err)
-		panic(err)
-	}
-
-	m, err := migrate.NewWithDatabaseInstance(
-		"file://./db/migrations",
-		"postgres", driver)
-
-	if err != nil {
-
-		fmt.Println("dsadsaad")
-		fmt.Println(err)
-	}
-
-	err = m.Up()
-
-	if err != nil {
-		fmt.Println(err)
 	}
 
 	return db
