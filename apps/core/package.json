@@ -2,8 +2,10 @@
     "name": "core",
     "version": "1.0.0",
     "scripts": {
-        "dev": "go build -gcflags='all=-N -l' -o out/main cmd/cloak/main.go && ./out/main",
-        "seed": "go run cmd/seed/main.go"
+        "db": "docker run --name cloak-core -e POSTGRES_PASSWORD=pwd -e POSTGRES_DB=database -d -p 5432:5432 postgres",
+        "deldb": "docker rm -f cloak-core",
+        "seed": "pnpm run db && go run cmd/seed/main.go",
+        "start": "docker container start cloak-core && go run cmd/server/main.go"
     },
     "license": "ISC"
 }
