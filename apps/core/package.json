@@ -6,7 +6,12 @@
         "devDelDb": "docker rm -f cloak-core",
         "devDbSchema": "go run cmd/dev/db-schema/main.go",
         "devSeedDb": "pnpm run db && go run cmd/seed/main.go",
-        "start": "docker container start cloak-core && go run cmd/server/main.go"
+        "start": "docker container start cloak-core && go run cmd/server/main.go",
+        "genGoProto": "protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative cloak.proto",
+        "genTSProto": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=. ./cloak/cloak.proto"
     },
-    "license": "ISC"
+    "license": "ISC",
+    "dependencies": {
+        "ts-proto": "^1.135.0"
+    }
 }
