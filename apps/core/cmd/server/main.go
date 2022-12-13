@@ -4,7 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	pb "github.com/averagebit/cloak/core/cloak"
+	pb "github.com/averagebit/cloak/core"
 	"google.golang.org/grpc"
 	"log"
 	"net"
