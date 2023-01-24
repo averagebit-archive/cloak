@@ -1,6 +1,6 @@
 import {z} from "zod";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "http://localhost:6000";
 
 export const User = z
     .object({
