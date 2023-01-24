@@ -3,7 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"github.com/averagebit/cloak/core/internal"
+	"github.com/averagebit/cloak/core/app"
 	"github.com/go-faker/faker/v4"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/joho/godotenv"
@@ -14,8 +14,8 @@ import (
 	"reflect"
 )
 
-func createUser() internal.User {
-	user := internal.User{}
+func createUser() app.User {
+	user := app.User{}
 	username := faker.Username()
 	handleID, _ := faker.RandomInt(1000, 2000, 1)
 
@@ -25,8 +25,8 @@ func createUser() internal.User {
 	return user
 }
 
-func createUserList() []internal.User {
-	users := make([]internal.User, 3)
+func createUserList() []app.User {
+	users := make([]app.User, 3)
 
 	for i := 0; i < len(users); i++ {
 		users[i] = createUser()
@@ -39,8 +39,8 @@ func createUserList() []internal.User {
 	return users
 }
 
-func createMessages(users []internal.User) []internal.Message {
-	message := internal.Message{}
+func createMessages(users []app.User) []app.Message {
+	message := app.Message{}
 	err := faker.FakeData(&message)
 
 	if err != nil {
@@ -48,7 +48,7 @@ func createMessages(users []internal.User) []internal.Message {
 	}
 
 	max := 4
-	messages := make([]internal.Message, max)
+	messages := make([]app.Message, max)
 
 	for i := 0; i < len(messages); i++ {
 		messages[i] = message
@@ -62,8 +62,8 @@ func createMessages(users []internal.User) []internal.Message {
 	return messages
 }
 
-func createRooms() internal.Room {
-	room := internal.Room{}
+func createRooms() app.Room {
+	room := app.Room{}
 	err := faker.FakeData(&room)
 
 	if err != nil {
@@ -71,7 +71,7 @@ func createRooms() internal.Room {
 	}
 
 	_ = faker.AddProvider("rooms", func(v reflect.Value) (interface{}, error) {
-		rooms := make([]internal.Room, 1)
+		rooms := make([]app.Room, 1)
 		rooms[0] = room
 		return rooms, nil
 	})
@@ -103,7 +103,7 @@ func main() {
 	messages := createMessages(users)
 	room := createRooms()
 
-	space := internal.Space{}
+	space := app.Space{}
 
 	err := faker.FakeData(&space)
 
@@ -124,7 +124,7 @@ func main() {
 	}
 }
 
-func insertUsers(db *sql.DB, user internal.User) int {
+func insertUsers(db *sql.DB, user app.User) int {
 	sqlStatement := "INSERT INTO users (username, handle) VALUES ($1, $2) RETURNING id;"
 
 	lastInsertId := 0
@@ -137,7 +137,7 @@ func insertUsers(db *sql.DB, user internal.User) int {
 	return lastInsertId
 }
 
-func insertSpace(db *sql.DB, space internal.Space) int {
+func insertSpace(db *sql.DB, space app.Space) int {
 	sqlStatement := "INSERT INTO spaces (name) VALUES ($1) RETURNING id;"
 
 	lastInsertId := 0
@@ -150,7 +150,7 @@ func insertSpace(db *sql.DB, space internal.Space) int {
 	return lastInsertId
 }
 
-func insertRoom(db *sql.DB, room internal.Room) int {
+func insertRoom(db *sql.DB, room app.Room) int {
 	sqlStatement := "INSERT INTO rooms (name) VALUES ($1) RETURNING id;"
 
 	lastInsertId := 0
