@@ -24,11 +24,11 @@ const RouteHome: Component = () => {
             5000
         );
 
-        setValue(state()); // 3
+        setValue(state());
         connect();
 
         createEffect(() => {
-            setValue(state()); // 0 or 1
+            setValue(state());
         });
     }
 

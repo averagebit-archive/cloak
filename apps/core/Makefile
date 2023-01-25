@@ -36,3 +36,6 @@ bootstrap:
 	echo "bootstrapping..."
 	make start_db
 	make run_proxy
+
+gen_proto:
+	protoc -I . --go_out=. --go-grpc_out=. ./proto/cloak_service.proto
