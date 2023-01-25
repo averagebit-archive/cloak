@@ -19,8 +19,5 @@ func CreateRouter(m *melody.Melody) *chi.Mux {
 		})
 	})
 
-	apiRouter := chi.NewRouter()
-	apiRouter.Mount("/api", router)
-
-	return apiRouter
+	return router
 }

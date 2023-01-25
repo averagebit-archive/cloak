@@ -1,18 +1,33 @@
 import { useNavigate } from "@solidjs/router";
-import { Component, createEffect, createSignal, onMount } from "solid-js";
+import { Component, createEffect, createSignal } from "solid-js";
+import { isServer } from "solid-js/web";
 import { Title } from "solid-start";
+import createWebsocket from "@solid-primitives/websocket";
+import { grpc } from "@improbable-eng/grpc-web";
+
+import { CloakServiceClientImpl, GrpcWebImpl } from "../../generated/cloak_service";
 import Input from "~/components/common/Input";
 import { Button } from "~/components/common/Button";
-import createWebsocket from "@solid-primitives/websocket";
-import { isServer } from "solid-js/web";
 
 const RouteHome: Component = () => {
     const [value, setValue] = createSignal(3);
     const navigate = useNavigate();
 
     if (!isServer) {
+        const transport = grpc.CrossBrowserHttpTransport({ withCredentials: false });
+        const rpc = new GrpcWebImpl('http://localhost:8080', {
+            debug: false,
+            metadata: new grpc.Metadata({}),
+            transport
+        });
+
+        const client = new CloakServiceClientImpl(rpc);
+        client.GetCurrentTime({}).then((res) => {
+            console.log(res);
+        });
+
         const [connect, disconnect, send, state, socket] = createWebsocket(
-            "ws://localhost:5000/api/ws",
+            "ws://localhost:5000/ws",
             (msg) => {
                 console.log(msg);
             },
@@ -29,6 +44,10 @@ const RouteHome: Component = () => {
 
         createEffect(() => {
             setValue(state());
+
+            if (value() === WebSocket.OPEN) {
+                send("hello");
+            }
         });
     }
 

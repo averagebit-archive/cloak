@@ -4,7 +4,8 @@
         "dev": "solid-start dev",
         "build": "solid-start build",
         "start": "solid-start start",
-        "lint": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore"
+        "lint": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore",
+        "gen_proto": "rm -rf ./generated && mkdir ./generated && protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_opt=outputClientImpl=grpc-web --ts_proto_out=./generated --proto_path=../../proto/ cloak_service.proto"
     },
     "type": "module",
     "devDependencies": {
@@ -16,12 +17,17 @@
         "vite": "^3.2.3"
     },
     "dependencies": {
+        "@improbable-eng/grpc-web": "^0.15.0",
         "@solid-primitives/websocket": "^0.3.4",
         "@solidjs/meta": "^0.28.2",
         "@solidjs/router": "^0.5.0",
+        "browser-headers": "^0.4.1",
+        "google-protobuf": "^3.21.2",
+        "protobufjs": "^7.2.0",
         "rxjs": "^7.8.0",
         "solid-js": "^1.6.1",
         "solid-start": "^0.2.5",
+        "ts-proto": "^1.136.1",
         "undici": "^5.12.0",
         "zod": "^3.19.1"
     },

@@ -37,5 +37,13 @@ bootstrap:
 	make start_db
 	make run_proxy
 
+#gen_proto:
+	#protoc -I . --go_out=. --go-grpc_out=. -I ../../proto/ cloak_service.proto
+
 gen_proto:
-	protoc -I . --go_out=. --go-grpc_out=. ./proto/cloak_service.proto
+	rm -rf ./generated && \
+	mkdir -p ./generated/cloak_service && \
+	protoc -I ../../proto/ \
+    --go_out ./generated/cloak_service --go_opt paths=source_relative \
+    --go-grpc_out ./generated/cloak_service --go-grpc_opt paths=source_relative \
+    cloak_service.proto
