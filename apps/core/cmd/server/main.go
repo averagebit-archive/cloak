@@ -5,17 +5,17 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	gw "github.com/averagebit/cloak/core/generated/cloak_service" // Update
+	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/olahol/melody"
+	"github.com/rs/cors"
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"net"
 	"net/http"
 	"time"
-
-	gw "github.com/averagebit/cloak/core/generated/cloak_service" // Update
-	"github.com/golang/glog"
-	"google.golang.org/grpc"
 )
 
 const (
@@ -88,7 +88,13 @@ func run() error {
 	}
 	// Start HTTP server (and proxy calls to gRPC server endpoint)
 	fmt.Println("HTTP Server started")
-	return http.ListenAndServe(":8081", mux)
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"*"},
+		Debug:          true,
+	})
+
+	handler := c.Handler(mux)
+	return http.ListenAndServe(":8081", handler)
 }
 
 func main() {

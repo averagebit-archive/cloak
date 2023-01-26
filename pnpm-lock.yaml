@@ -26,6 +26,8 @@ importers:
 
   apps/web:
     specifiers:
+      '@bufbuild/connect-web': ^0.6.0
+      '@bufbuild/protobuf': ^1.0.0
       '@improbable-eng/grpc-web': ^0.15.0
       '@solid-primitives/websocket': ^0.3.4
       '@solidjs/meta': ^0.28.2
@@ -46,6 +48,8 @@ importers:
       vite: ^3.2.3
       zod: ^3.19.1
     dependencies:
+      '@bufbuild/connect-web': 0.6.0_@bufbuild+protobuf@1.0.0
+      '@bufbuild/protobuf': 1.0.0
       '@improbable-eng/grpc-web': 0.15.0_google-protobuf@3.21.2
       '@solid-primitives/websocket': 0.3.4_solid-js@1.6.1
       '@solidjs/meta': 0.28.2_solid-js@1.6.1
@@ -1161,6 +1165,18 @@ packages:
       '@babel/helper-string-parser': 7.19.4
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
+
+  /@bufbuild/connect-web/0.6.0_@bufbuild+protobuf@1.0.0:
+    resolution: {integrity: sha512-dfiXt7ye/sC1MwBtCyR1XYZHjKvVpCxLP/HcnHYoa6POi+Ey1t058bCc14HdT2EpYEZYN7SW1M2tuZ5SnabmhA==}
+    peerDependencies:
+      '@bufbuild/protobuf': ^1.0.0
+    dependencies:
+      '@bufbuild/protobuf': 1.0.0
+    dev: false
+
+  /@bufbuild/protobuf/1.0.0:
+    resolution: {integrity: sha512-oH3jHBrZ6to8Qf4zLg7O8KqSY42kQZNBRXJRMp5uSi0mqE4L8NbyMnZHeOsbXmTb0xpptRyH11LfS+KeVhXzAA==}
+    dev: false
 
   /@catppuccin/palette/0.1.5:
     resolution: {integrity: sha512-IQLsZwXDMpLc5CFGjIMa/gFnnFL/QLB280F11B51JweZHerZ/FgPXdIR4eQqn1CgrqI3wGfgnj1LVPx12DV/Uw==}

@@ -1,15 +1,22 @@
 version: v1
 plugins:
+  - plugin: buf.build/bufbuild/connect-web
+    opt: target=ts
+    out: generated/cloak_service/es
+  # dependencies
+  - plugin: buf.build/bufbuild/es
+    opt: target=ts
+    out: generated/cloak_service/es
   - name: go
-    out: generated/cloak_service
+    out: generated/cloak_service/go
     opt:
       - paths=source_relative
   - name: go-grpc
-    out: generated/cloak_service
+    out: generated/cloak_service/go
     opt:
       - paths=source_relative
   - name: grpc-gateway
-    out: generated/cloak_service
+    out: generated/cloak_service/go
     opt:
       - paths=source_relative
       - generate_unbound_methods=true

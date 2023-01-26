@@ -17,6 +17,8 @@
         "vite": "^3.2.3"
     },
     "dependencies": {
+        "@bufbuild/connect-web": "^0.6.0",
+        "@bufbuild/protobuf": "^1.0.0",
         "@improbable-eng/grpc-web": "^0.15.0",
         "@solid-primitives/websocket": "^0.3.4",
         "@solidjs/meta": "^0.28.2",

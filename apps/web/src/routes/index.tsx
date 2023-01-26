@@ -1,29 +1,31 @@
 import { useNavigate } from "@solidjs/router";
-import { Component, createEffect, createSignal } from "solid-js";
+import { Component, createEffect, createMemo, createSignal } from "solid-js";
 import { isServer } from "solid-js/web";
 import { Title } from "solid-start";
 import createWebsocket from "@solid-primitives/websocket";
-import { grpc } from "@improbable-eng/grpc-web";
+import { createCallbackClient, createConnectTransport } from "@bufbuild/connect-web";
 
-import { CloakServiceClientImpl, GrpcWebImpl } from "../../generated/cloak_service";
 import Input from "~/components/common/Input";
 import { Button } from "~/components/common/Button";
+import { CloakService } from "../../generated/service_connectweb";
 
 const RouteHome: Component = () => {
     const [value, setValue] = createSignal(3);
     const navigate = useNavigate();
 
     if (!isServer) {
-        const transport = grpc.CrossBrowserHttpTransport({ withCredentials: false });
-        const rpc = new GrpcWebImpl('http://localhost:8080', {
-            debug: false,
-            metadata: new grpc.Metadata({}),
-            transport
+        const transport = createConnectTransport({
+            baseUrl: "http://localhost:9090"
         });
 
-        const client = new CloakServiceClientImpl(rpc);
-        client.GetCurrentTime({}).then((res) => {
-            console.log(res);
+        const client = createCallbackClient(CloakService, transport);
+
+        client.echo({ value: "I feel happy." }, (err: any, res: any) => {
+            if (!err) {
+                console.log(res.sentence);
+            } else {
+                console.log(err);
+            }
         });
 
         const [connect, disconnect, send, state, socket] = createWebsocket(
