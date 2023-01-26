@@ -27,7 +27,7 @@ const RouteHome: Component = () => {
         });
 
         const [connect, disconnect, send, state, socket] = createWebsocket(
-            "ws://localhost:5000/ws",
+            "ws://localhost:8081/ws",
             (msg) => {
                 console.log(msg);
             },

@@ -2,8 +2,11 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"flag"
 	"fmt"
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/olahol/melody"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"net"
@@ -58,18 +61,24 @@ func run() error {
 
 	// Register gRPC server endpoint
 	// Note: Make sure the gRPC server is running properly and accessible
-	//m := melody.New()
-	//mux := runtime.NewServeMux()
-	//
-	//mux.Handle("GET", "/ws", func(w http.ResponseWriter, r *http.Request) {
-	//	m.HandleRequest(w, r)
-	//})
-	//
-	//m.HandleMessage(func(s *melody.Session, msg []byte) {
-	//	m.BroadcastFilter(msg, func(q *melody.Session) bool {
-	//		return q.Request.URL.Path == s.Request.URL.Path
-	//	})
-	//})
+	m := melody.New()
+	mux := runtime.NewServeMux()
+
+	mux.HandlePath("GET", "/heartbeat", func(w http.ResponseWriter, r *http.Request, pathParams map[string]string) {
+		fmt.Println("Got heartbeat")
+		json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
+	})
+
+	mux.HandlePath("GET", "/ws", func(w http.ResponseWriter, r *http.Request, pathParams map[string]string) {
+		fmt.Println("Got a websocket request")
+		m.HandleRequest(w, r)
+	})
+
+	m.HandleMessage(func(s *melody.Session, msg []byte) {
+		m.BroadcastFilter(msg, func(q *melody.Session) bool {
+			return q.Request.URL.Path == s.Request.URL.Path
+		})
+	})
 
 	opts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
 	err = gw.RegisterCloakServiceHandlerFromEndpoint(ctx, mux, *grpcServerEndpoint, opts)
