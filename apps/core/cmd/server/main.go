@@ -2,106 +2,49 @@ package main
 
 import (
 	"context"
-	"encoding/json"
-	"flag"
 	"fmt"
-	gw "github.com/averagebit/cloak/core/generated/cloak_service" // Update
-	"github.com/golang/glog"
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	"github.com/olahol/melody"
+	"github.com/averagebit/cloak/core/generated/cloak_service"
+	"github.com/averagebit/cloak/core/generated/cloak_service/cloak_serviceconnect"
+	"github.com/bufbuild/connect-go"
 	"github.com/rs/cors"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
+	"golang.org/x/net/http2"
+	"golang.org/x/net/http2/h2c"
 	"log"
-	"net"
 	"net/http"
-	"time"
-)
-
-const (
-	listenAddress = "0.0.0.0:9090"
-)
-
-var (
-	// command-line options:
-	// gRPC server endpoint
-	grpcServerEndpoint = flag.String("grpc-server-endpoint", "localhost:9090", "gRPC server endpoint")
 )
 
 type cloakService struct {
-	// NOTE: this has to be here to satisfy the interface, otherwise the compiler will complain
-	gw.UnimplementedCloakServiceServer
 }
 
-func (t *cloakService) Echo(ctx context.Context, req *gw.StringMessage) (*gw.StringMessage, error) {
-	log.Println("Got time here!")
-	return &gw.StringMessage{Value: time.Now().String()}, nil
-}
-
-func run() error {
-	ctx := context.Background()
-	ctx, cancel := context.WithCancel(ctx)
-	defer cancel()
-
-	lis, err := net.Listen("tcp", listenAddress)
-
-	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
-	}
-
-	s := grpc.NewServer()
-	gw.RegisterCloakServiceServer(s, &cloakService{})
-
-	go func() {
-		fmt.Println("GRPC Server started")
-		if err := s.Serve(lis); err != nil {
-			log.Fatalf("failed to serve: %v", err)
-		}
-	}()
-
-	// Register gRPC server endpoint
-	// Note: Make sure the gRPC server is running properly and accessible
-	m := melody.New()
-	mux := runtime.NewServeMux()
-
-	mux.HandlePath("GET", "/heartbeat", func(w http.ResponseWriter, r *http.Request, pathParams map[string]string) {
-		fmt.Println("Got heartbeat")
-		json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
+func (s *cloakService) Echo(
+	ctx context.Context,
+	req *connect.Request[cloak_service.StringMessage],
+) (*connect.Response[cloak_service.StringMessage], error) {
+	log.Println("Request headers: ", req.Header())
+	res := connect.NewResponse(&cloak_service.StringMessage{
+		Value: fmt.Sprintf("Hello, there."),
 	})
-
-	mux.HandlePath("GET", "/ws", func(w http.ResponseWriter, r *http.Request, pathParams map[string]string) {
-		fmt.Println("Got a websocket request")
-		m.HandleRequest(w, r)
-	})
-
-	m.HandleMessage(func(s *melody.Session, msg []byte) {
-		m.BroadcastFilter(msg, func(q *melody.Session) bool {
-			return q.Request.URL.Path == s.Request.URL.Path
-		})
-	})
-
-	opts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
-	err = gw.RegisterCloakServiceHandlerFromEndpoint(ctx, mux, *grpcServerEndpoint, opts)
-
-	if err != nil {
-		return err
-	}
-	// Start HTTP server (and proxy calls to gRPC server endpoint)
-	fmt.Println("HTTP Server started")
-	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"*"},
-		Debug:          true,
-	})
-
-	handler := c.Handler(mux)
-	return http.ListenAndServe(":8081", handler)
+	res.Header().Set("Greet-Version", "v1")
+	return res, nil
 }
 
 func main() {
-	flag.Parse()
-	defer glog.Flush()
+	cloak := &cloakService{}
+	mux := http.NewServeMux()
+	path, handler := cloak_serviceconnect.NewCloakServiceHandler(cloak)
+	mux.Handle(path, handler)
 
-	if err := run(); err != nil {
-		glog.Fatal(err)
-	}
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"http://localhost:3000"},
+		AllowedHeaders: []string{"*"},
+		Debug:          true,
+	})
+
+	corsHandler := c.Handler(mux)
+
+	http.ListenAndServe(
+		"localhost:8080",
+		// Use h2c so we can serve HTTP/2 without TLS.
+		h2c.NewHandler(corsHandler, &http2.Server{}),
+	)
 }

@@ -15,42 +15,53 @@ const RouteHome: Component = () => {
 
     if (!isServer) {
         const transport = createConnectTransport({
-            baseUrl: "http://localhost:9090"
+            baseUrl: "http://localhost:8080",
+            // By default, connect-web clients use the JSON format.
+            // Set this option to true to use the binary format.
+            useBinaryFormat: false,
+
+            // Controls what the fetch client will do with credentials, such as
+            // Cookies. The default value is "same-origin", which will not
+            // transmit Cookies in cross-origin requests.
+            credentials: "omit",
+
+            // Interceptors apply to all calls running through this transport.
+            interceptors: [],
         });
 
         const client = createCallbackClient(CloakService, transport);
 
         client.echo({ value: "I feel happy." }, (err: any, res: any) => {
             if (!err) {
-                console.log(res.sentence);
+                console.log(res.value);
             } else {
                 console.log(err);
             }
         });
-
-        const [connect, disconnect, send, state, socket] = createWebsocket(
-            "ws://localhost:8081/ws",
-            (msg) => {
-                console.log(msg);
-            },
-            (msg) => {
-                console.log(msg);
-            },
-            [],
-            5,
-            5000
-        );
-
-        setValue(state());
-        connect();
-
-        createEffect(() => {
-            setValue(state());
-
-            if (value() === WebSocket.OPEN) {
-                send("hello");
-            }
-        });
+        //
+        // const [connect, disconnect, send, state, socket] = createWebsocket(
+        //     "ws://localhost:8081/ws",
+        //     (msg) => {
+        //         console.log(msg);
+        //     },
+        //     (msg) => {
+        //         console.log(msg);
+        //     },
+        //     [],
+        //     5,
+        //     5000
+        // );
+        //
+        // setValue(state());
+        // connect();
+        //
+        // createEffect(() => {
+        //     setValue(state());
+        //
+        //     if (value() === WebSocket.OPEN) {
+        //         send("hello");
+        //     }
+        // });
     }
 
     return (

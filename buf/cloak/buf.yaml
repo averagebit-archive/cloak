@@ -1,4 +1,2 @@
 version: v1
 name: ""
-deps:
-  - buf.build/googleapis/googleapis
