@@ -1,8 +1,5 @@
-import {Component, createEffect, onCleanup, Resource} from "solid-js";
-import {createRouteData, Title, useRouteData} from "solid-start";
-import Modal from "~/components/modals/Modal";
-import Sidebar from "~/components/sidebar/Sidebar";
-import {useRoomContext} from "~/context";
+import {Component, Resource} from "solid-js";
+import {createRouteData} from "solid-start";
 import {Friend, FriendType, http} from "~/services";
 import MainView from "~/components/MainView";
 

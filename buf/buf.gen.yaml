@@ -1,18 +1,23 @@
 version: v1
 plugins:
+  # START OF TS GENERATION
   - plugin: buf.build/bufbuild/connect-web
-    opt: target=ts
-    out: generated/cloak_service/es
+    out: ../apps/web/generated
+    opt:
+      - target=ts
   # dependencies
   - plugin: buf.build/bufbuild/es
-    opt: target=ts
-    out: generated/cloak_service/es
+    out: ../apps/web/generated
+    opt:
+      - target=ts
+
+  # START OF GO GENERATION
   - plugin: buf.build/bufbuild/connect-go
-    out: generated/cloak_service
+    out: ../apps/core/generated
     opt:
       - paths=source_relative
   # dependencies
   - plugin: buf.build/protocolbuffers/go
-    out: generated/cloak_service
+    out: ../apps/core/generated
     opt:
       - paths=source_relative
