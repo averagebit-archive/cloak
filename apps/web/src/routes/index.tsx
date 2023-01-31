@@ -38,30 +38,30 @@ const RouteHome: Component = () => {
                 console.log(err);
             }
         });
-        //
-        // const [connect, disconnect, send, state, socket] = createWebsocket(
-        //     "ws://localhost:8081/ws",
-        //     (msg) => {
-        //         console.log(msg);
-        //     },
-        //     (msg) => {
-        //         console.log(msg);
-        //     },
-        //     [],
-        //     5,
-        //     5000
-        // );
-        //
-        // setValue(state());
-        // connect();
-        //
-        // createEffect(() => {
-        //     setValue(state());
-        //
-        //     if (value() === WebSocket.OPEN) {
-        //         send("hello");
-        //     }
-        // });
+
+        const [connect, disconnect, send, state, socket] = createWebsocket(
+            "ws://localhost:8080/ws",
+            (msg) => {
+                console.log(msg);
+            },
+            (msg) => {
+                console.log(msg);
+            },
+            [],
+            5,
+            5000
+        );
+
+        setValue(state());
+        connect();
+
+        createEffect(() => {
+            setValue(state());
+
+            if (value() === WebSocket.OPEN) {
+                send("hello");
+            }
+        });
     }
 
     return (

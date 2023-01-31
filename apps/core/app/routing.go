@@ -6,7 +6,8 @@ import (
 	"net/http"
 )
 
-func CreateRouter(m *melody.Melody) *chi.Mux {
+func CreateRouter() *chi.Mux {
+	m := melody.New()
 	router := chi.NewRouter()
 
 	router.Get("/ws", func(w http.ResponseWriter, r *http.Request) {
