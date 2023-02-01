@@ -6,14 +6,14 @@
 @tailwind utilities;
 
 :root {
-    --font-mono: "JetBrains Mono", monospace;
-    --font-sans: "Inter";
+  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: "Inter";
 }
 
 html,
 body {
-    background: #1e1e2e;
-    color: #cdd6f4;
-    font-size: 14px;
-    font-family: var(--font-sans);
+  background: #1e1e2e;
+  color: #cdd6f4;
+  font-size: 14px;
+  font-family: var(--font-sans);
 }

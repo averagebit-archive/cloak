@@ -53,7 +53,7 @@ export async function getUser(request: Request) {
 
 export async function createUserSession(token: string, redirectTo: string) {
     const session = await storage.getSession();
-    session.set("server_token", token);
+    session.set("user_session", token);
     console.log("redirect to", redirectTo);
     return redirect(redirectTo, {
         headers: {
@@ -64,7 +64,7 @@ export async function createUserSession(token: string, redirectTo: string) {
 
 async function getUserId(request: Request) {
     const session = await getUserSession(request);
-    const userId = session.get("userId");
+    const userId = session.get("user_session");
     if (!userId || typeof userId !== "string") return null;
     return userId;
 }
